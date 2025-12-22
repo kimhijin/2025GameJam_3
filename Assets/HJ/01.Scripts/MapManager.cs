@@ -5,7 +5,7 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
     [SerializeField] private Fruit[] fruit;
-    [SerializeField] private GameObject settingUI;
+    [SerializeField] private GameObject clearUI;
     private int fruitCnt;
 
     public static MapManager Instance { get; private set; }
@@ -23,7 +23,7 @@ public class MapManager : MonoBehaviour
         ++fruitCnt;
         if(fruitCnt >= fruit.Length)
         {
-            settingUI.SetActive(true);
+            clearUI.SetActive(true);
         }
     }
 }

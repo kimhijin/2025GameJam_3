@@ -22,6 +22,11 @@ namespace HJ
             SceneManager.LoadScene(nextSceneName);
         }
 
+        public void HandleExit()
+        {
+            Application.Quit();
+        }
+
         public void HandleRestart()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
