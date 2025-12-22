@@ -6,6 +6,7 @@ public abstract class Agent : MonoBehaviour
     [SerializeField] protected float moveDuration = 0.2f;
 
     protected Vector2Int gridPosition;
+    protected Animator animator;
     public Vector2Int GridPosition 
     { 
         get => gridPosition;
@@ -19,6 +20,7 @@ public abstract class Agent : MonoBehaviour
 
     protected virtual void Start()
     {
+        animator = GetComponent<Animator>();
         gridPosition = GridManager.Instance.WorldToGridPosition(transform.position);
         GridManager.Instance.SetCellOccupied(gridPosition, gameObject);
     }
@@ -69,6 +71,13 @@ public abstract class Agent : MonoBehaviour
 
         transform.position = targetPos;
         isMoving = false;
+        
+        OnMoveComplete();  // 이동 완료 신호
+    }
+
+    protected virtual void OnMoveComplete()  // ← virtual 추가
+    {
+        // 기본적으로 아무것도 안 함
     }
 
     protected bool IsObstacleAt(Vector2Int gridPos)

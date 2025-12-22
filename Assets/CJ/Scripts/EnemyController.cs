@@ -6,22 +6,52 @@ public class EnemyController : Agent
     [SerializeField] private int detectionRange = 5;
     [SerializeField] private int maxGridDistance = 4;
     [SerializeField] private float moveInterval = 0.2f;
+    [SerializeField] private float idleTimeout = 0.5f;  // ← 추가
 
     private PlayerController player;
     private float moveTimer = 0f;
+    private float idleTimer = 0f;  // ← 추가
+    private bool shouldStopAnimation = false;  // ← 추가
 
     private bool stickToVerticalWall = false;
     private bool stickToHorizontalWall = false;
+
+    private SpriteRenderer spriteRenderer;
+    private Vector2Int lastMoveDirection = Vector2Int.right;
 
     protected override void Start()
     {
         base.Start();
         player = FindFirstObjectByType<PlayerController>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        lastMoveDirection = Vector2Int.right;
     }
 
     protected override void Update()
     {
         base.Update();
+
+        // 방향은 계속 업데이트
+        if (lastMoveDirection.x != 0)
+        {
+            animator?.SetBool("IsRight", true);
+        }
+        else if (lastMoveDirection.y != 0)
+        {
+            animator?.SetBool("IsRight", false);
+        }
+
+        // IsMoving만 0.5초 기준
+        if (shouldStopAnimation && !isMoving)
+        {
+            idleTimer += Time.deltaTime;
+            if (idleTimer >= idleTimeout)
+            {
+                animator?.SetBool("IsMoving", false);
+                shouldStopAnimation = false;
+                idleTimer = 0f;
+            }
+        }
 
         if (!isMoving)
         {
@@ -35,6 +65,7 @@ public class EnemyController : Agent
         }
     }
 
+
     private void DecideNextMove()
     {
         if (player == null)
@@ -44,7 +75,11 @@ public class EnemyController : Agent
         int manhattanDistance = GetManhattanDistance(gridPosition, playerPos);
 
         if (manhattanDistance > detectionRange)
+        {
+            shouldStopAnimation = true;
+            idleTimer = 0f;
             return;
+        }
 
         if (stickToVerticalWall)
         {
@@ -75,12 +110,18 @@ public class EnemyController : Agent
                 stickToHorizontalWall = true;
             }
 
+            shouldStopAnimation = true;
+            idleTimer = 0f;
             return;
         }
 
         List<Vector2Int> pathToPlayer = FindPathBFS(gridPosition, playerPos);
         if (pathToPlayer == null || pathToPlayer.Count == 0)
+        {
+            shouldStopAnimation = true;
+            idleTimer = 0f;
             return;
+        }
 
         int gridDistance = pathToPlayer.Count - 1;
 
@@ -153,7 +194,7 @@ public class EnemyController : Agent
             if (IsObstacleAt(nextPos))
                 return false;
 
-            return TryMoveAsEnemy(step);
+            return MoveWithDirection(step);
         }
 
         if (gridPosition.y == playerPos.y)
@@ -165,7 +206,7 @@ public class EnemyController : Agent
             if (IsObstacleAt(nextPos))
                 return false;
 
-            return TryMoveAsEnemy(step);
+            return MoveWithDirection(step);
         }
 
         return false;
@@ -190,9 +231,13 @@ public class EnemyController : Agent
         }
 
         if (playerPos.y > gridPosition.y)
-            TryMoveAsEnemy(Vector2Int.up);
+        {
+            MoveWithDirection(Vector2Int.up);
+        }
         else if (playerPos.y < gridPosition.y)
-            TryMoveAsEnemy(Vector2Int.down);
+        {
+            MoveWithDirection(Vector2Int.down);
+        }
     }
 
     private void FollowAlongHorizontalWall(Vector2Int playerPos)
@@ -214,9 +259,13 @@ public class EnemyController : Agent
         }
 
         if (playerPos.x > gridPosition.x)
-            TryMoveAsEnemy(Vector2Int.right);
+        {
+            MoveWithDirection(Vector2Int.right);
+        }
         else if (playerPos.x < gridPosition.x)
-            TryMoveAsEnemy(Vector2Int.left);
+        {
+            MoveWithDirection(Vector2Int.left);
+        }
     }
 
     private bool IsObstacleBetweenColumns(int minX, int maxX, int y)
@@ -307,7 +356,7 @@ public class EnemyController : Agent
         Vector2Int nextStep = path[1];
         Vector2Int dir = nextStep - gridPosition;
 
-        TryMoveAsEnemy(dir);
+        MoveWithDirection(dir);
     }
 
     private void MoveCloserToPlayer(Vector2Int playerPos)
@@ -339,7 +388,9 @@ public class EnemyController : Agent
         }
 
         if (found)
-            TryMoveAsEnemy(bestMove);
+        {
+            MoveWithDirection(bestMove);
+        }
     }
 
     private void MoveWithDirectionPriority(Vector2Int playerPos)
@@ -383,7 +434,7 @@ public class EnemyController : Agent
             PlayerController pc = occupier.GetComponent<PlayerController>();
             if (pc != null)
             {
-                StartCoroutine(MoveToCell(newPos));
+                MoveWithDirection(direction);
                 pc.OnCaughtByEnemy();
                 return true;
             }
@@ -394,7 +445,85 @@ public class EnemyController : Agent
         if (IsObstacleAt(newPos))
             return false;
 
+        return MoveWithDirection(direction);
+    }
+
+    private bool MoveWithDirection(Vector2Int direction)
+    {
+        if (isMoving)
+            return false;
+
+        Vector2Int newPos = gridPosition + direction;
+
+        if (!GridManager.Instance.IsWalkable(newPos))
+            return false;
+
+        if (IsObstacleAt(newPos))
+            return false;
+
+        lastMoveDirection = direction;
+    
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.flipX = (direction.x < 0);
+            spriteRenderer.flipY = (direction.y > 0);  // ← 반대로!
+        }
+
+        bool isHorizontal = (direction.x != 0);
+        SetAnimation(true, isHorizontal);
+
+        shouldStopAnimation = false;
+        idleTimer = 0f;
+
         StartCoroutine(MoveToCell(newPos));
         return true;
     }
+
+
+
+    private void SetAnimation(bool isMoving, bool isRight)
+    {
+        if (animator != null)
+        {
+            animator.SetBool("IsMoving", isMoving);
+            animator.SetBool("IsRight", isRight);
+        }
+    }
+
+
+    protected override void OnMoveComplete()
+    {
+        shouldStopAnimation = true;
+        idleTimer = 0f;
+    
+        // 플레이어를 바라보기
+        if (player != null)
+        {
+            Vector2Int playerPos = player.GridPosition;
+            Vector2Int dirToPlayer = playerPos - gridPosition;
+        
+            if (Mathf.Abs(dirToPlayer.x) > Mathf.Abs(dirToPlayer.y))
+            {
+                // 좌우로 더 먼 경우
+                lastMoveDirection = new Vector2Int(dirToPlayer.x > 0 ? 1 : -1, 0);
+            }
+            else
+            {
+                // 상하로 더 먼 경우
+                lastMoveDirection = new Vector2Int(0, dirToPlayer.y > 0 ? 1 : -1);
+            }
+        
+            // Flip 업데이트
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.flipX = (lastMoveDirection.x < 0);
+                spriteRenderer.flipY = (lastMoveDirection.y > 0);
+            }
+        
+            // 애니메이터 업데이트
+            bool isHorizontal = (lastMoveDirection.x != 0);
+            animator?.SetBool("IsRight", isHorizontal);
+        }
+    }
+
 }
