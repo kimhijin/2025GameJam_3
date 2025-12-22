@@ -6,10 +6,10 @@ public class HoleTrap : MonoBehaviour
     [SerializeField] private Sprite openImg;
     [SerializeField] private Sprite closeImg;
     private SpriteRenderer _spr;
-    private int count = 0;
 
-    [SerializeField] private EnterSignal[] btnObj;
+    [SerializeField] private BtnObject[] btnObj;
     private bool canKill;
+    private int count = 0;
 
     private void Awake()
     {
@@ -45,6 +45,7 @@ public class HoleTrap : MonoBehaviour
     private void HandleCloseHole()
     {
         _spr.sprite = closeImg;
+        --count;
         canKill = false;
     }
 
