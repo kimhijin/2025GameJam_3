@@ -102,7 +102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openImg: {fileID: 0}
   closeImg: {fileID: 0}
-  btnObj: {fileID: 2932156044290163450}
+  btnObj:
+  - {fileID: 0}
 --- !u!1 &5118474609205181944
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +149,7 @@ GameObject:
   - component: {fileID: 9090399019818809684}
   - component: {fileID: 5870904119399143782}
   - component: {fileID: 3558170089657558777}
-  - component: {fileID: 2932156044290163450}
+  - component: {fileID: 3085256243008806440}
   m_Layer: 0
   m_Name: Btn
   m_TagString: Untagged
@@ -299,7 +300,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2932156044290163450
+--- !u!114 &3085256243008806440
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -308,7 +309,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7614422368039240581}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70cfd23543a45bf46bef7f61254f7c05, type: 3}
+  m_Script: {fileID: 11500000, guid: acbe1bf732c2fc54897f4c260d7f1891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enterImg: {fileID: 0}
