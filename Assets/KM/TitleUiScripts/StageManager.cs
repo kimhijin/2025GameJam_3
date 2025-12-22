@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class StageManager : MonoBehaviour
@@ -69,10 +70,12 @@ public class StageManager : MonoBehaviour
             {
                 StageList[i].GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
                 GameObject starparent = StageList[i].transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
+                GameObject timerparent = StageList[i].transform.GetChild(1).gameObject.transform.GetChild(1).gameObject;
                 for(int j = 0; j < clearStageStarNums[i]; j++)
                 {
                     starparent.transform.GetChild(j).gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
                 }
+                timerparent.GetComponent<TMP_Text>().text = clearStageTimers[i].ToString("F2") + "s";
             }
         }
     }
