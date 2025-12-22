@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 
     private bool gameOverFlag = false;
 
+    public GameOverUI _overUI;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -22,7 +24,7 @@ public class GameManager : MonoBehaviour
             return;
 
         gameOverFlag = true;
-        //game over 처리(UI 띄어주고, 씬 재로드 정도?)
+        _overUI.gameObject.SetActive(true);
     }
 
     public void Restart()
