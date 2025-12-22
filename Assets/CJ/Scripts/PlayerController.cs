@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : Agent
@@ -92,17 +93,22 @@ public class PlayerController : Agent
     {
         if (spriteRenderer == null) return;
 
-        // 좌우 플립은 항상 처리
-        spriteRenderer.flipX = (LastDirection.x < 0);
-
-        // IsRight가 false(위/아래)일 때만 flipY 적용
-        bool isUpDown = (LastDirection.y != 0);
-        if (!isUpDown)   // IsRight = true 인 상황(좌우)이면 flipY 건들지 않음
+        // 1) 좌우 입력이면: flipX 설정 + flipY 무조건 false
+        if (LastDirection.x != 0)
+        {
+            spriteRenderer.flipX = (LastDirection.x < 0); // A: true, D: false
+            spriteRenderer.flipY = false;                 // 좌우 이동 시에는 항상 원래대로
             return;
+        }
 
-        // 위/아래일 때만 flipY
-        spriteRenderer.flipY = (LastDirection.y > 0);
+        // 2) 위/아래 입력이면: flipX는 그대로 두고 flipY만 W에서 true, S에서 false
+        if (LastDirection.y != 0)
+        {
+            // flipX는 이전 값 유지 (정면/후면만 뒤집기)
+            spriteRenderer.flipY = (LastDirection.y > 0); // W: true, S: false
+        }
     }
+
 
     public void CollectItem()
     {
@@ -111,11 +117,48 @@ public class PlayerController : Agent
     }
     public override void Dead()
     {
-        base.Dead();
-        if (GameManager.Instance != null)
+        // 입력 잠금 (직접 구현한 InputManager 있으면 거기서 막기)
+        // InputManager.Instance.Enabled = false;
+
+        StartCoroutine(Co_StylishDeath());
+    }
+
+    private IEnumerator Co_StylishDeath()
+    {
+        // 1) 슬로 모션 + 카메라 쉐이크
+        Time.timeScale = 0.2f;
+        CameraShaker.Instance.Shake(0.2f, 0.3f); // (진폭, 시간) 직접 구현
+
+        // 2) 플레이어 축소 + 투명도 페이드
+        float duration = 0.6f;
+        float t = 0f;
+        SpriteRenderer sr = spriteRenderer;
+        Color startColor = sr.color;
+        Vector3 startScale = transform.localScale;
+
+        while (t < duration)
         {
-            GameManager.Instance.GameOver();
+            t += Time.unscaledDeltaTime; // 슬로 모션 영향 안 받게
+            float lerp = t / duration;
+
+            // 점점 작게
+            transform.localScale = Vector3.Lerp(startScale, startScale * 0.2f, lerp);
+            // 투명도 감소
+            sr.color = new Color(startColor.r, startColor.g, startColor.b, 1f - lerp);
+
+            yield return null;
         }
+
+        // 3) 화면 블랙 페이드
+        yield return ScreenFader.Instance.FadeOutCoroutine(0.8f);
+
+        // 4) 타임 되돌리고 GameOver
+        Time.timeScale = 1f;
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.GameOver();
+
         Destroy(gameObject);
     }
+
 }
