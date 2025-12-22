@@ -5,9 +5,8 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
     [SerializeField] private Fruit[] fruit;
+    [SerializeField] private GameObject settingUI;
     private int fruitCnt;
-    public event Action OnClear;
-    public event Action OnDead;
 
     public static MapManager Instance { get; private set; }
 
@@ -19,17 +18,12 @@ public class MapManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void HandleDead()
-    {
-        OnDead?.Invoke();
-    }
-
     public void CheckFruit()
     {
         ++fruitCnt;
         if(fruitCnt >= fruit.Length)
         {
-            OnClear?.Invoke();
+            settingUI.SetActive(true);
         }
     }
 }
