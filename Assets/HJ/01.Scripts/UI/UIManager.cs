@@ -14,7 +14,7 @@ namespace HJ
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape) && !clearUI)
+            if (Input.GetKeyDown(KeyCode.Escape) && !clearUI.activeSelf)
                 ActiveSetting();    
         }
 
@@ -52,6 +52,7 @@ namespace HJ
 
         public void ActiveSetting()
         {
+            Debug.Log("Input Esc");
             if(settingUI.activeSelf == false)
             {
                 settingUI.SetActive(true);
