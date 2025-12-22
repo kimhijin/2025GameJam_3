@@ -11,8 +11,9 @@ namespace HJ
         private Collider2D _col;
 
         [SerializeField] private BtnObject[] btnObj;
-        private bool canKill;
         private int count = 0;
+
+        [SerializeField] private bool isActive;
 
         private void Awake()
         {
@@ -24,7 +25,6 @@ namespace HJ
             foreach (var item in btnObj)
             {
                 item.OnEnter += HandleOpenHole;
-                item.OnExit += HandleCloseHole;
             }
         }
 
@@ -33,30 +33,20 @@ namespace HJ
             foreach (var item in btnObj)
             {
                 item.OnEnter -= HandleOpenHole;
-                item.OnExit -= HandleCloseHole;
             }
         }
 
         private void HandleOpenHole()
         {
-            Debug.Log("HoleEnter");
             ++count;
             if (count >= btnObj.Length)
             {
-                _spr.sprite = openImg;
-                canKill = true;
+                isActive = !isActive;
+                
 
+                _spr.sprite = openImg;
                 _col.enabled = false;
             }
-        }
-
-        private void HandleCloseHole()
-        {
-            _spr.sprite = closeImg;
-            --count;
-            canKill = false;
-
-            _col.enabled = true;
         }
     }
 }
