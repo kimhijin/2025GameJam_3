@@ -13,11 +13,11 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance { get; private set; }
     [SerializeField]private AudioSource bgmSource;
     [SerializeField] private AudioClip bgmClip;
-    private float bgmVolume;
+    public float bgmVolume { get; private set;}
 
     [SerializeField]private AudioSource sfxSource;
     [SerializeField] private AudioClip[] clipes;
-    private float sfxVolume;
+    public float sfxVolume { get; private set; }
 
     private Dictionary<string, AudioClip> clipDic = new();
 
@@ -28,7 +28,7 @@ public class SoundManager : MonoBehaviour
         else
             Destroy(gameObject);
 
-        foreach(var item in clipes)
+        foreach (var item in clipes)
         {
             clipDic[item.name] = item;
         }
@@ -53,11 +53,19 @@ public class SoundManager : MonoBehaviour
 
     public void SetSFXVolume(float volume)
     {
+        sfxVolume = volume;
         sfxSource.volume = volume;
     }
 
     public void SetBGMVolume(float volume)
     {
+        bgmVolume = volume;
         bgmSource.volume = volume;
+    }
+
+    public void SaveVolum()
+    {
+        PlayerPrefs.SetFloat("Bgm", bgmSource.volume);
+        PlayerPrefs.SetFloat("Sfx", sfxSource.volume);
     }
 }

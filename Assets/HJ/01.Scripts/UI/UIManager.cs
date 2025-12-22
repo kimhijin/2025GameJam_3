@@ -25,10 +25,9 @@ namespace HJ
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.Escape))
-            {
-                settingUI.SetActive(true);
-            }
+                settingUI.SetActive(!settingUI.activeSelf);
         }
+
 
         public void HandleNextScene()
         {
@@ -44,11 +43,6 @@ namespace HJ
         {
             //스테이지 고르는 씬으로 ㄱㄱ
             SceneManager.LoadScene("Stage");
-        }
-
-        public void HandleSetting()
-        {
-            settingUI.SetActive(true);
         }
 
         private void HandleClearUI()

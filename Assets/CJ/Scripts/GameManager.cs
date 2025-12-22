@@ -26,13 +26,4 @@ public class GameManager : MonoBehaviour
         gameOverFlag = true;
         _overUI.gameObject.SetActive(true);
     }
-
-    public void Restart()
-    {
-        Time.timeScale = 1f;
-        gameOverFlag = false;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(
-            UnityEngine.SceneManagement.SceneManager.GetActiveScene().name
-        );
-    }
 }

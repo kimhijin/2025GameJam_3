@@ -5,18 +5,22 @@ using UnityEngine.UI;
 public class SettingUI : MonoBehaviour
 {
     [SerializeField] private Slider sfxSlider;
-    private float sfxVolum;
     [SerializeField] private Slider bgmSlider;
-    private float bgmVolum;
 
     private void Awake()
     {
         gameObject.SetActive(false);
     }
 
-    public void ActiveOption()
+    private void OnEnable()
     {
-        gameObject.SetActive(!gameObject.activeSelf);
+        sfxSlider.value = SoundManager.Instance.sfxVolume;
+        bgmSlider.value = SoundManager.Instance.bgmVolume;
+    }
+
+    private void OnDisable()
+    {
+        SoundManager.Instance.SaveVolum();
     }
 
     public void ChangeSFX()
