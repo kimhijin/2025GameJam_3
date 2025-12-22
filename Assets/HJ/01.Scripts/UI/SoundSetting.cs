@@ -20,7 +20,8 @@ public class SoundSetting : MonoBehaviour
 
     private void OnDisable()
     {
-        SoundManager.Instance.SaveVolum();
+        if(SoundManager.Instance != null)
+            SoundManager.Instance.SaveVolum();
     }
 
     public void ChangeSFX()
