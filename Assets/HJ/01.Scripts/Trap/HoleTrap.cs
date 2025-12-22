@@ -38,13 +38,15 @@ public class HoleTrap : MonoBehaviour
         if(count >= btnObj.Length)
         {
             _spr.sprite = openImg;
+            gameObject.layer = LayerMask.NameToLayer("Obstacle");
             canKill = true;
         }
     }
 
     private void HandleCloseHole()
     {
-        _spr.sprite = closeImg;
+        _spr.sprite = closeImg; 
+        gameObject.layer = LayerMask.NameToLayer("Default");
         --count;
         canKill = false;
     }
@@ -53,7 +55,7 @@ public class HoleTrap : MonoBehaviour
     {
         if(canKill)
         {
-            //¾î¶² AgentÀÌµçÁö Á×ÀÌ±â
+            //ï¿½î¶² Agentï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½
             if(collision.TryGetComponent<IKillable>(out IKillable k))
             {
                 k.Dead();

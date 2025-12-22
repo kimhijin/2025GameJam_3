@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -438,19 +439,15 @@ public class EnemyController : Agent
         GameObject occupier = GridManager.Instance.GetOccupier(newPos);
         if (occupier != null)
         {
-            // IKillable 인터페이스로 처리
             IKillable killable = occupier.GetComponent<IKillable>();
             if (killable != null)
             {
-                // 먼저 적이 그 칸으로 이동
                 MoveWithDirection(direction);
-
-                // 이동 후 플레이어 죽음 처리
                 killable.Dead();
                 return true;
             }
 
-            return false;    // 다른 오브젝트면 못 감
+            return false;
         }
 
         if (IsObstacleAt(newPos))
@@ -492,8 +489,6 @@ public class EnemyController : Agent
     {
         shouldStopAnimation = true;
         idleTimer = 0f;
-        
-        // 플레이어를 바라보기
         if (player != null)
         {
             Vector2Int playerPos = player.GridPosition;
@@ -501,25 +496,45 @@ public class EnemyController : Agent
             
             if (Mathf.Abs(dirToPlayer.x) > Mathf.Abs(dirToPlayer.y))
             {
-                // 좌우로 더 먼 경우
                 lastMoveDirection = new Vector2Int(dirToPlayer.x > 0 ? 1 : -1, 0);
             }
             else
             {
-                // 상하로 더 먼 경우
                 lastMoveDirection = new Vector2Int(0, dirToPlayer.y > 0 ? 1 : -1);
             }
-            
-            // Flip 업데이트
             if (spriteRenderer != null)
             {
                 spriteRenderer.flipX = (lastMoveDirection.x < 0);
                 spriteRenderer.flipY = (lastMoveDirection.y > 0);
             }
-            
-            // 애니메이터 업데이트
             bool isHorizontal = (lastMoveDirection.x != 0);
             animator?.SetBool("IsRight", isHorizontal);
         }
+    }
+
+    public override void Dead()
+    {
+        StartCoroutine(Co_StylishDeath());
+    }
+
+    private IEnumerator Co_StylishDeath()
+    {
+        float duration = 0.6f;
+        float t = 0f;
+        SpriteRenderer sr = spriteRenderer;
+        Color startColor = sr.color;
+        Vector3 startScale = transform.localScale;
+
+        while (t < duration)
+        {
+            t += Time.unscaledDeltaTime;
+            float lerp = t / duration;
+
+            transform.localScale = Vector3.Lerp(startScale, startScale * 0.2f, lerp);
+            sr.color = new Color(startColor.r, startColor.g, startColor.b, 1f - lerp);
+
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 }
