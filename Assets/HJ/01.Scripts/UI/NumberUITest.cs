@@ -10,10 +10,9 @@ public class NumberUITest : MonoBehaviour
     [SerializeField] private Image go;
     private Sequence sq;
 
-    private void Awake()
+    private void Start()
     {
         Time.timeScale = 0;
-
         one.transform.localScale = new Vector2(0, 0);
         two.transform.localScale = new Vector2(0, 0);
         three.transform.localScale = new Vector2(0, 0);
@@ -35,7 +34,6 @@ public class NumberUITest : MonoBehaviour
 
     private void StartGame()
     {
-        Debug.Log("Start");
         Time.timeScale = 1;
     }
 }

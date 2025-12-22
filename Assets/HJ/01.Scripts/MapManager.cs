@@ -2,14 +2,14 @@ using HJ;
 using System;
 using UnityEngine;
 
-public class ItemManager : MonoBehaviour
+public class MapManager : MonoBehaviour
 {
     [SerializeField] private Fruit[] fruit;
     private int fruitCnt;
-    public event Action OnGetKey;
     public event Action OnClear;
+    public event Action OnDead;
 
-    public static ItemManager Instance { get; private set; }
+    public static MapManager Instance { get; private set; }
 
     private void Awake()
     {
@@ -19,9 +19,9 @@ public class ItemManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void CheckKey()
+    public void HandleDead()
     {
-        OnGetKey?.Invoke();
+        OnDead?.Invoke();
     }
 
     public void CheckFruit()

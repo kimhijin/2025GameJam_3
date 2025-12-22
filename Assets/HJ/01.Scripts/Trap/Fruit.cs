@@ -17,6 +17,8 @@ namespace HJ
 
         public void GetItem()
         {
+            Debug.Log("GetItme " + gameObject.name);
+            MapManager.Instance.CheckFruit();
             _spr.sprite = eatImg;
             _col.enabled = false;
         }
