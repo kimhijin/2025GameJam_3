@@ -23,7 +23,7 @@ public class ClearUIAnimation : MonoBehaviour
 
     private void OnEnable()
     {
-        currentTime = GameManager.Instance.Timer;
+        //currentTime = GameManager.Instance.Timer;
         SpawnStar();
         Time.timeScale = 0;
     }
