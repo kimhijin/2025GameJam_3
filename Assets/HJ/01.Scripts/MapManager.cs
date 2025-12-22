@@ -11,9 +11,9 @@ public class Data
 
 public class MapManager : MonoBehaviour
 {
-    [SerializeField] private Fruit[] fruit;
+    [SerializeField] private Cheese[] fruit;
     [SerializeField] private GameObject clearUI;
-    private int fruitCnt;
+    private int fruitCnt = 0;
 
     public static MapManager Instance { get; private set; }
 
@@ -30,6 +30,8 @@ public class MapManager : MonoBehaviour
         ++fruitCnt;
         if(fruitCnt >= fruit.Length)
         {
+            Debug.Log("OpenClearUI");
+            Debug.Assert(clearUI != null, "ClearUI is null");
             clearUI.SetActive(true);
         }
     }

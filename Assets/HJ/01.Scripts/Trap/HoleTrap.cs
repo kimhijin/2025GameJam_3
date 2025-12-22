@@ -33,7 +33,6 @@ public class HoleTrap : MonoBehaviour
 
     private void HandleOpenHole()
     {
-        Debug.Log("HoleEnter");
         ++count;
         if(count >= btnObj.Length)
         {
