@@ -1,26 +1,15 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace HJ
 {
+
+
     public class UIManager : MonoBehaviour
     {
+        [SerializeField] private GameObject soundUI; //
         [SerializeField] private GameObject settingUI;
-        [SerializeField] private GameObject clearUI;
-
         [SerializeField] private string nextSceneName;
-
-        private void Awake()
-        {
-            MapManager.Instance.OnClear += HandleClearUI;
-        }
-
-
-        private void OnDestroy()
-        {
-            MapManager.Instance.OnClear -= HandleClearUI;
-        }
 
         private void Update()
         {
@@ -34,6 +23,11 @@ namespace HJ
             SceneManager.LoadScene(nextSceneName);
         }
 
+        public void HandleExit()
+        {
+            Application.Quit();
+        }
+
         public void HandleRestart()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -45,10 +39,14 @@ namespace HJ
             SceneManager.LoadScene("Stage");
         }
 
-        private void HandleClearUI()
+        public void HandleOpenSetting()
         {
-            Debug.Log("OpenUI");
-            clearUI.SetActive(true);
+            soundUI.SetActive(true);
+        }
+
+        public void HandleCloseSetting()
+        {
+            soundUI.SetActive(false);
         }
     }
 }

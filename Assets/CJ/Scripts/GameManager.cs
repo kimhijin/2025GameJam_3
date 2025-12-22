@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour
 
     private bool gameOverFlag = false;
 
-    public GameOverUI _overUI;
+    [SerializeField] private GameOverUI _overUI;
+    public float Timer { get; private set; }
 
     private void Awake()
     {
@@ -16,6 +17,16 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this;
+    }
+
+    private void Start()
+    {
+        Timer = 0;
+    }
+
+    private void Update()
+    {
+        Timer += Time.deltaTime;
     }
 
     public void GameOver()
