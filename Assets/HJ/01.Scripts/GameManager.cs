@@ -1,25 +1,29 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace HJ
 {
-    public static GameManager Instance { get; private set; }
-    public float Timer { get; private set; }
-
-    private void Awake()
+    public class GameManager : MonoBehaviour
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-    }
+        public static GameManager Instance { get; private set; }
+        public float Timer { get; private set; }
 
-    private void Start()
-    {
-        Timer = 0;
-    }
+        private void Awake()
+        {
+            if (Instance == null)
+                Instance = this;
+            else
+                Destroy(gameObject);
+        }
 
-    private void Update()
-    {
-        Timer += Time.deltaTime;
+        private void Start()
+        {
+            Timer = 0;
+        }
+
+        private void Update()
+        {
+            Timer += Time.deltaTime;
+        }
     }
 }
+
