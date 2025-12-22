@@ -80,22 +80,28 @@ public class PlayerController : Agent
     {
         if (animator == null) return;
 
-        // IsMoving 파라미터 업데이트
+        // IsMoving
         animator.SetBool("IsMoving", isMoving);
 
-        // IsRight 파라미터 업데이트
-        // 위/아래만 false, 나머지(좌/우)는 true
+        // IsRight: 좌우면 true, 위아래면 false
         bool isUpDown = (LastDirection.y != 0);
         animator.SetBool("IsRight", !isUpDown);
     }
 
     private void UpdateFlip()
     {
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.flipX = (LastDirection.x < 0);
-            spriteRenderer.flipY = (LastDirection.y > 0);  // 반대로!
-        }
+        if (spriteRenderer == null) return;
+
+        // 좌우 플립은 항상 처리
+        spriteRenderer.flipX = (LastDirection.x < 0);
+
+        // IsRight가 false(위/아래)일 때만 flipY 적용
+        bool isUpDown = (LastDirection.y != 0);
+        if (!isUpDown)   // IsRight = true 인 상황(좌우)이면 flipY 건들지 않음
+            return;
+
+        // 위/아래일 때만 flipY
+        spriteRenderer.flipY = (LastDirection.y > 0);
     }
 
     public void CollectItem()
@@ -103,32 +109,13 @@ public class PlayerController : Agent
         itemsCollected++;
         Debug.Log("아이템 획득! 총: " + itemsCollected);
     }
-
-    public void OnDrowning()
+    public override void Dead()
     {
-        Debug.Log("플레이어가 물에 빠져 죽었습니다!");
-        
+        base.Dead();
         if (GameManager.Instance != null)
         {
             GameManager.Instance.GameOver();
         }
-        else
-        {
-            Time.timeScale = 0f;
-        }
-    }
-
-    public void OnCaughtByEnemy()
-    {
-        Debug.Log("플레이어가 적에게 잡혔습니다!");
-        
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.GameOver();
-        }
-        else
-        {
-            Time.timeScale = 0f;
-        }
+        Destroy(gameObject);
     }
 }

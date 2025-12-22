@@ -22,8 +22,7 @@ public class GameManager : MonoBehaviour
             return;
 
         gameOverFlag = true;
-        Time.timeScale = 0f;
-        Debug.Log("==== GAME OVER ====");
+        //game over 처리(UI 띄어주고, 씬 재로드 정도?)
     }
 
     public void Restart()

@@ -1,12 +1,13 @@
 using UnityEngine;
 using System.Collections;
 
-public abstract class Agent : MonoBehaviour
+public abstract class Agent : MonoBehaviour,IKillable
 {
     [SerializeField] protected float moveDuration = 0.2f;
 
     protected Vector2Int gridPosition;
     protected Animator animator;
+    
     public Vector2Int GridPosition 
     { 
         get => gridPosition;
@@ -72,10 +73,10 @@ public abstract class Agent : MonoBehaviour
         transform.position = targetPos;
         isMoving = false;
         
-        OnMoveComplete();  // 이동 완료 신호
+        OnMoveComplete();
     }
 
-    protected virtual void OnMoveComplete()  // ← virtual 추가
+    protected virtual void OnMoveComplete()
     {
         // 기본적으로 아무것도 안 함
     }
@@ -85,5 +86,10 @@ public abstract class Agent : MonoBehaviour
         Vector3 worldPos = GridManager.Instance.GridToWorldPosition(gridPos);
         Collider2D hit = Physics2D.OverlapCircle(worldPos, 0.1f, unwalkableLayer);
         return hit != null;
+    }
+
+    public virtual void Dead()
+    {
+        
     }
 }

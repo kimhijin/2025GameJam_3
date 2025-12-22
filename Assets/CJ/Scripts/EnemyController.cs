@@ -6,12 +6,12 @@ public class EnemyController : Agent
     [SerializeField] private int detectionRange = 5;
     [SerializeField] private int maxGridDistance = 4;
     [SerializeField] private float moveInterval = 0.2f;
-    [SerializeField] private float idleTimeout = 0.5f;  // ← 추가
+    [SerializeField] private float idleTimeout = 0.5f;
 
     private PlayerController player;
     private float moveTimer = 0f;
-    private float idleTimer = 0f;  // ← 추가
-    private bool shouldStopAnimation = false;  // ← 추가
+    private float idleTimer = 0f;
+    private bool shouldStopAnimation = false;
 
     private bool stickToVerticalWall = false;
     private bool stickToHorizontalWall = false;
@@ -31,14 +31,21 @@ public class EnemyController : Agent
     {
         base.Update();
 
-        // 방향은 계속 업데이트
-        if (lastMoveDirection.x != 0)
+        // IsRight 파라미터 업데이트 (방향 기반)
+        bool isHorizontal = (lastMoveDirection.x != 0);
+        animator?.SetBool("IsRight", isHorizontal);
+
+        // 플레이어가 범위 밖이면 상태 초기화
+        if (player != null)
         {
-            animator?.SetBool("IsRight", true);
-        }
-        else if (lastMoveDirection.y != 0)
-        {
-            animator?.SetBool("IsRight", false);
+            int manhattanDistance = GetManhattanDistance(gridPosition, player.GridPosition);
+            if (manhattanDistance > detectionRange)
+            {
+                shouldStopAnimation = true;
+                idleTimer = 0f;
+                stickToVerticalWall = false;
+                stickToHorizontalWall = false;
+            }
         }
 
         // IsMoving만 0.5초 기준
@@ -65,7 +72,6 @@ public class EnemyController : Agent
         }
     }
 
-
     private void DecideNextMove()
     {
         if (player == null)
@@ -74,6 +80,7 @@ public class EnemyController : Agent
         Vector2Int playerPos = player.GridPosition;
         int manhattanDistance = GetManhattanDistance(gridPosition, playerPos);
 
+        // 범위 밖: 움직이지 않기
         if (manhattanDistance > detectionRange)
         {
             shouldStopAnimation = true;
@@ -431,15 +438,19 @@ public class EnemyController : Agent
         GameObject occupier = GridManager.Instance.GetOccupier(newPos);
         if (occupier != null)
         {
-            PlayerController pc = occupier.GetComponent<PlayerController>();
-            if (pc != null)
+            // IKillable 인터페이스로 처리
+            IKillable killable = occupier.GetComponent<IKillable>();
+            if (killable != null)
             {
+                // 먼저 적이 그 칸으로 이동
                 MoveWithDirection(direction);
-                pc.OnCaughtByEnemy();
+
+                // 이동 후 플레이어 죽음 처리
+                killable.Dead();
                 return true;
             }
 
-            return false;
+            return false;    // 다른 오브젝트면 못 감
         }
 
         if (IsObstacleAt(newPos))
@@ -448,30 +459,27 @@ public class EnemyController : Agent
         return MoveWithDirection(direction);
     }
 
+
     private bool MoveWithDirection(Vector2Int direction)
     {
-        if (isMoving)
-            return false;
+        if (isMoving) return false;
 
         Vector2Int newPos = gridPosition + direction;
-
-        if (!GridManager.Instance.IsWalkable(newPos))
-            return false;
-
-        if (IsObstacleAt(newPos))
-            return false;
+        if (!GridManager.Instance.IsWalkable(newPos)) return false;
+        if (IsObstacleAt(newPos)) return false;
 
         lastMoveDirection = direction;
-    
+
         if (spriteRenderer != null)
         {
             spriteRenderer.flipX = (direction.x < 0);
-            spriteRenderer.flipY = (direction.y > 0);  // ← 반대로!
+
+            bool isUpDown = (direction.y != 0);
+            if (isUpDown)
+                spriteRenderer.flipY = (direction.y > 0);
         }
 
-        bool isHorizontal = (direction.x != 0);
-        SetAnimation(true, isHorizontal);
-
+        animator?.SetBool("IsMoving", true);
         shouldStopAnimation = false;
         idleTimer = 0f;
 
@@ -480,28 +488,17 @@ public class EnemyController : Agent
     }
 
 
-
-    private void SetAnimation(bool isMoving, bool isRight)
-    {
-        if (animator != null)
-        {
-            animator.SetBool("IsMoving", isMoving);
-            animator.SetBool("IsRight", isRight);
-        }
-    }
-
-
     protected override void OnMoveComplete()
     {
         shouldStopAnimation = true;
         idleTimer = 0f;
-    
+        
         // 플레이어를 바라보기
         if (player != null)
         {
             Vector2Int playerPos = player.GridPosition;
             Vector2Int dirToPlayer = playerPos - gridPosition;
-        
+            
             if (Mathf.Abs(dirToPlayer.x) > Mathf.Abs(dirToPlayer.y))
             {
                 // 좌우로 더 먼 경우
@@ -512,18 +509,17 @@ public class EnemyController : Agent
                 // 상하로 더 먼 경우
                 lastMoveDirection = new Vector2Int(0, dirToPlayer.y > 0 ? 1 : -1);
             }
-        
+            
             // Flip 업데이트
             if (spriteRenderer != null)
             {
                 spriteRenderer.flipX = (lastMoveDirection.x < 0);
                 spriteRenderer.flipY = (lastMoveDirection.y > 0);
             }
-        
+            
             // 애니메이터 업데이트
             bool isHorizontal = (lastMoveDirection.x != 0);
             animator?.SetBool("IsRight", isHorizontal);
         }
     }
-
 }
