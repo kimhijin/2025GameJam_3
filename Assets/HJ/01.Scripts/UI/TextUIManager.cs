@@ -8,13 +8,17 @@ public class TextUIManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI timerTxt;
 
+    [SerializeField] private bool isActive;
+
     private void Awake()
     {
-        gameObject.SetActive(false);
+        if(!isActive)
+            gameObject.SetActive(false);
     }
 
     private void OnEnable()
     {
+        if (GameManager.Instance == null) return;
         levelTxt.text = levelName;
         Debug.Assert(timerTxt != null, " timer Txt");
         Debug.Assert(GameManager.Instance != null, " GameManager is null");
