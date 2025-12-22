@@ -1,9 +1,10 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace HJ
 {
+
+
     public class UIManager : MonoBehaviour
     {
         [SerializeField] private GameObject soundUI; //

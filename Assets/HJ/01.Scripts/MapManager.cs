@@ -2,6 +2,13 @@ using HJ;
 using System;
 using UnityEngine;
 
+[System.Serializable]
+public class Data
+{
+    public int startCnt;
+    public float timer;
+}
+
 public class MapManager : MonoBehaviour
 {
     [SerializeField] private Fruit[] fruit;
