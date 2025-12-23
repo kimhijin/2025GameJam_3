@@ -24857,7 +24857,6 @@ MonoBehaviour:
   - {fileID: 1933342444}
   - {fileID: 244715671}
   clearUI: {fileID: 1498568320}
-  isClear: 0
 --- !u!4 &555781459
 Transform:
   m_ObjectHideFlags: 0
@@ -25054,7 +25053,7 @@ MonoBehaviour:
   soundUI: {fileID: 848971648}
   settingUI: {fileID: 1762526791}
   clearUI: {fileID: 1498568320}
-  nextSceneName: Stage3
+  nextSceneName: 
 --- !u!114 &572804564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102988,7 +102987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb0c1316c4f23a4c85b6489f4271f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
+  canvas: {fileID: 572804562}
 --- !u!4 &1751303801
 Transform:
   m_ObjectHideFlags: 0
@@ -103184,9 +103183,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelTxt: {fileID: 1041926822}
+  levelName: Test Level
   timerTxt: {fileID: 156173735}
   isActive: 0
-  isClearUI: 0
 --- !u!224 &1762526793
 RectTransform:
   m_ObjectHideFlags: 0
