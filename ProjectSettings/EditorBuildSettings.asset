@@ -23,6 +23,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/KM/Scenes/Stages/Stage1.unity
     guid: 0ad233ca6c955f44fa968aa98d08f425
+  - enabled: 1
+    path: Assets/KM/Scenes/Stages/Stage2.unity
+    guid: e4130983fd419af4b839b2f99595bba7
+  - enabled: 1
+    path: Assets/KM/Scenes/Stages/Stage3.unity
+    guid: f0140659b88f3aa43b5da744af16681d
+  - enabled: 1
+    path: Assets/KM/Scenes/Stages/Stage4.unity
+    guid: 7971a6f1cf6f7634683369e71e6e503a
+  - enabled: 1
+    path: Assets/KM/Scenes/Stages/Stage5.unity
+    guid: f2c9d75e97bc5cb45bd939d48b0a1080
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
