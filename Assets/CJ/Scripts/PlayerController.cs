@@ -15,7 +15,6 @@ public class PlayerController : Agent
     public int itemsCollected { get; private set; } = 0;
 
     private SpriteRenderer spriteRenderer;
-    private bool wasMovingLastFrame = false;
 
     protected override void Start()
     {
@@ -46,18 +45,13 @@ public class PlayerController : Agent
                 {
                     LastDirection = bufferedDirection;
                     UpdateFlip();
+                    UpdateAnimatorDirection();
                     TryMove(bufferedDirection);
                 }
                 
                 bufferedDirection = Vector2Int.zero;
                 moveTimer = 0f;
             }
-        }
-
-        if (isMoving != wasMovingLastFrame)
-        {
-            UpdateAnimatorParameters();
-            wasMovingLastFrame = isMoving;
         }
     }
 
@@ -80,15 +74,6 @@ public class PlayerController : Agent
             bufferedDirection = moveDirection;
     }
 
-    private void UpdateAnimatorParameters()
-    {
-        if (animator == null) return;
-        animator.SetBool("IsMoving", isMoving);
-
-        bool isUpDown = (LastDirection.y != 0);
-        animator.SetBool("IsRight", !isUpDown);
-    }
-
     private void UpdateFlip()
     {
         if (spriteRenderer == null) return;
@@ -104,6 +89,29 @@ public class PlayerController : Agent
         {
             spriteRenderer.flipY = (LastDirection.y > 0);
         }
+    }
+
+    private void UpdateAnimatorDirection()
+    {
+        if (animator == null) return;
+
+        bool isUpDown = (LastDirection.y != 0);
+        animator.SetBool("IsRight", !isUpDown);
+    }
+
+    protected override void OnMoveComplete()
+    {
+        animator?.SetBool("IsMoving", false);
+    }
+
+    public override bool TryMove(Vector2Int direction)
+    {
+        bool result = base.TryMove(direction);
+        if (result)
+        {
+            animator?.SetBool("IsMoving", true);
+        }
+        return result;
     }
 
     public override void Dead()

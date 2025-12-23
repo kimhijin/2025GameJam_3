@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public abstract class Agent : MonoBehaviour,IKillable
+public abstract class Agent : MonoBehaviour, IKillable
 {
     [SerializeField] protected float moveDuration = 0.2f;
 
@@ -45,11 +45,11 @@ public abstract class Agent : MonoBehaviour,IKillable
         if (occupier != null)
             return false;
 
-        StartCoroutine(MoveToCell(newPosition));
+        StartCoroutine(MoveToCell(newPosition, direction));
         return true;
     }
 
-    protected IEnumerator MoveToCell(Vector2Int newGridPos)
+    protected IEnumerator MoveToCell(Vector2Int newGridPos, Vector2Int direction)
     {
         isMoving = true;
 
@@ -78,7 +78,6 @@ public abstract class Agent : MonoBehaviour,IKillable
 
     protected virtual void OnMoveComplete()
     {
-        // 기본적으로 아무것도 안 함
     }
 
     protected bool IsObstacleAt(Vector2Int gridPos)
