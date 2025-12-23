@@ -16,6 +16,10 @@ public class StageManager : MonoBehaviour
     public int CurrentStage { get; set; } //�ش罺�������� Indx��ȣ�� ���������� ���� ��� ����
     private void Awake()
     {
+        if(PlayerPrefs.GetInt("TotalClearStage", -1) == -1)
+        {
+            ClearAllData();
+        }
         if (Instance == null)
         {
             Instance = this;
