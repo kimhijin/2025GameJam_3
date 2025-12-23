@@ -8,7 +8,7 @@ public class StageManager : MonoBehaviour
 {
     static public StageManager Instance;
     [SerializeField] private int nowStageNum = 0;
-    [SerializeField] private List<int> clearStageStarNums = new List<int>();
+    public List<int> clearStageStarNums = new List<int>();
     public List<float> clearStageTimers = new List<float>();
     [SerializeField] private List<StageUI> StageList = new List<StageUI>();
 
@@ -54,11 +54,10 @@ public class StageManager : MonoBehaviour
 
     public void SaveStage(Data data)
     {
-
         if(clearStageStarNums.Count + 1 > nowStageNum)
         {
-            clearStageStarNums[nowStageNum - 1] = data.startCnt;
-            clearStageTimers[nowStageNum - 1] = data.timer;
+            clearStageStarNums[CurrentStage - 1] = data.startCnt;
+            clearStageTimers[CurrentStage - 1] = data.timer;
         }
         else
         {
@@ -128,7 +127,10 @@ public class StageManager : MonoBehaviour
     [ContextMenu("AddStageNum")]
     public void AddStageNum()
     {
-        nowStageNum = CurrentStage +1;
+        if(CurrentStage + 1 > nowStageNum)
+        {
+            nowStageNum = CurrentStage + 1;
+        }
     }
 
     [ContextMenu("SaveData")]
