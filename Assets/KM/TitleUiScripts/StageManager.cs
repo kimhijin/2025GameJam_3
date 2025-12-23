@@ -54,9 +54,9 @@ public class StageManager : MonoBehaviour
 
     public void SaveStage(Data data)
     {
-        if (!clearStageStarNums.Contains(data.stageNum))
+        //if (!clearStageStarNums.Contains(data.stageNum))
             clearStageStarNums.Add(data.startCnt);
-        if(!clearStageTimers.Contains(data.stageNum))
+        //if(!clearStageTimers.Contains(data.stageNum))
             clearStageTimers.Add(data.timer);
 
         PlayerPrefs.SetInt("TotalClearStage", clearStageStarNums.Count);
@@ -111,9 +111,11 @@ public class StageManager : MonoBehaviour
     public void ClearAllData()
     {
         PlayerPrefs.DeleteAll();
-        nowStageNum = 0;
+        PlayerPrefs.SetInt("TotalClearStage", 1);
+        nowStageNum = 1;
         clearStageStarNums.Clear();
         clearStageTimers.Clear();
+        SaveData();
     }
 
     [ContextMenu("AddStageNum")]
