@@ -1,7 +1,6 @@
 using DG.Tweening;
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +12,6 @@ public class ClearUIAnimation : MonoBehaviour
     [SerializeField] private GameObject starObj;
     [SerializeField] private RectTransform starParent;
     private float currentTime;
-    private int stageIdx;
 
     [Header("��ư")]
     [SerializeField] private Button[] btns; //���� ��� 
@@ -24,10 +22,11 @@ public class ClearUIAnimation : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelTxt;
     [SerializeField] private TextMeshProUGUI timerTxt;
 
+    [SerializeField] private int stageIdx;
+
     private void Awake()
     {
         Init();
-        stageIdx = StageManager.Instance.CurrentStage;
     }
 
     private void OnEnable()
@@ -40,6 +39,7 @@ public class ClearUIAnimation : MonoBehaviour
 
     private void Init()
     {
+        StageManager.Instance.CurrentStage = stageIdx;
         foreach(var item in btns)
         {
             item.enabled = false;
@@ -98,7 +98,7 @@ public class ClearUIAnimation : MonoBehaviour
 
     private void ShowGoodPng()
     {
-        goodImg.DOFade(1, 0.2f);
+        goodImg.DOFade(1, 0.2f).SetUpdate(true);
         goodImg.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(Ease.InSine).SetUpdate(true)
             .OnComplete(()=>StartCoroutine(ContinueRotation(goodImg.gameObject, true)));
     }
@@ -114,6 +114,9 @@ public class ClearUIAnimation : MonoBehaviour
 
     private void SaveData(int starCnt)
     {
+        StageManager.Instance.CurrentStage = stageIdx;
+        Debug.LogWarning(stageIdx - 1);
+        Debug.Assert(StageManager.Instance.clearStageTimers[stageIdx-1] != null, "Sex");
         float timer = StageManager.Instance.clearStageTimers[stageIdx-1];
 
         Data data = new Data();
@@ -132,15 +135,14 @@ public class ClearUIAnimation : MonoBehaviour
         StageManager.Instance.AddStageNum();
 
         Debug.Log(StageManager.Instance.CurrentStage);
-        if(StageManager.Instance.CurrentStage == 5)
+        if(StageManager.Instance.CurrentStage == 5 || StageManager.Instance.nowStageNum > stageIdx + 1)
         {
             return;
         }
         Data data2 = new Data();
         data2.startCnt = 0;
         data2.timer = int.MaxValue;
-        StageManager.Instance.SaveStage(data2);  
-        StageManager.Instance.CurrentStage = stageIdx + 1;
+        StageManager.Instance.SaveStage(data2);
     }
 
 }

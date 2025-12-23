@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class StageManager : MonoBehaviour
 {
     static public StageManager Instance;
-    [SerializeField] private int nowStageNum = 0;
+    public int nowStageNum = 0;
     public List<int> clearStageStarNums = new List<int>();
     public List<float> clearStageTimers = new List<float>();
     [SerializeField] private List<StageUI> StageList = new List<StageUI>();

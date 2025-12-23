@@ -523,7 +523,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1000
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!224 &69226601
 RectTransform:
@@ -56459,10 +56459,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingUI
       objectReference: {fileID: 0}
-    - target: {fileID: 5180914648124399160, guid: cf8fb7ae90726a84f99e74ae6c56cc31, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5337609251633690383, guid: cf8fb7ae90726a84f99e74ae6c56cc31, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -65917,6 +65913,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 69226597}
+    - target: {fileID: 5769187457107173242, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
+      propertyPath: twoTime
+      value: 16.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769187457107173242, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
+      propertyPath: stageIdx
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769187457107173242, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
+      propertyPath: threeTime
+      value: 13.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8936327524537799924, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
