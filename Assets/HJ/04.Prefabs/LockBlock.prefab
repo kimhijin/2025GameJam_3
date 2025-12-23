@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4665447669796218241}
   - component: {fileID: 6131727262252067662}
   - component: {fileID: 1867349961529088756}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: LockBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -148,8 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c6eec5a1dfb464aa5dad9e927e12c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openImg: {fileID: 21300000, guid: 705578036c81e4d9183c53c72a19a105, type: 3}
-  closeImg: {fileID: 6853316077166303748, guid: 0f627f375f45cad41953a022ae78dfb1, type: 3}
+  openImg: {fileID: 0}
+  closeImg: {fileID: 21300000, guid: bce532474ebc904458c9291e4a8e338f, type: 3}
   openBtns:
   - {fileID: 0}
   closeBtns: []
