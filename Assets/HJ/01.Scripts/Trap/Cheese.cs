@@ -20,6 +20,7 @@ namespace HJ
             Debug.Log("GetItme " + gameObject.name);
             MapManager.Instance.CheckFruit();
             _ani.SetTrigger("Eat");
+            gameObject.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().Play();
             _col.enabled = false;
         }
     }

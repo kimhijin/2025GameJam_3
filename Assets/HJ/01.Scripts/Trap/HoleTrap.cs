@@ -9,6 +9,7 @@ public class HoleTrap : MonoBehaviour
 
     [SerializeField] private BtnObject[] openBtns;
     [SerializeField] private BtnObject[] closeBtns;
+    [SerializeField] private Vector2 boxSize;
     private bool canKill;
     private int count = 0;
 
@@ -83,15 +84,29 @@ public class HoleTrap : MonoBehaviour
         canKill = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void FixedUpdate()
     {
         if(canKill)
         {
-            //� Agent�̵��� ���̱�
-            if(collision.TryGetComponent<IKillable>(out IKillable k))
+            Collider2D asibar = Physics2D.OverlapBox(transform.position, boxSize,0f, LayerMask.GetMask("Enemy", "Player"));
+
+            if(asibar != null)
             {
-                k.Dead();
+                if (asibar.TryGetComponent<IKillable>(out IKillable k))
+                {
+                    k.Dead();
+                }
             }
         }
+        else
+        {
+            return;   
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, boxSize);
     }
 }

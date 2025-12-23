@@ -13,6 +13,7 @@ public class EnemyController : Agent
     private float moveTimer = 0f;
     private float idleTimer = 0f;
     private bool shouldStopAnimation = false;
+    private bool isDead = false;
 
     private bool stickToVerticalWall = false;
     private bool stickToHorizontalWall = false;
@@ -32,11 +33,11 @@ public class EnemyController : Agent
     {
         base.Update();
 
-        // IsRight 파라미터 업데이트 (방향 기반)
+        if (isDead) return;
+
         bool isHorizontal = (lastMoveDirection.x != 0);
         animator?.SetBool("IsRight", isHorizontal);
 
-        // 플레이어가 범위 밖이면 상태 초기화
         if (player != null)
         {
             int manhattanDistance = GetManhattanDistance(gridPosition, player.GridPosition);
@@ -49,7 +50,6 @@ public class EnemyController : Agent
             }
         }
 
-        // IsMoving만 0.5초 기준
         if (shouldStopAnimation && !isMoving)
         {
             idleTimer += Time.deltaTime;
@@ -64,7 +64,6 @@ public class EnemyController : Agent
         if (!isMoving)
         {
             moveTimer += Time.deltaTime;
-
             if (moveTimer >= moveInterval)
             {
                 DecideNextMove();
@@ -75,13 +74,11 @@ public class EnemyController : Agent
 
     private void DecideNextMove()
     {
-        if (player == null)
-            return;
+        if (isDead || player == null) return;
 
         Vector2Int playerPos = player.GridPosition;
         int manhattanDistance = GetManhattanDistance(gridPosition, playerPos);
 
-        // 범위 밖: 움직이지 않기
         if (manhattanDistance > detectionRange)
         {
             shouldStopAnimation = true;
@@ -110,13 +107,9 @@ public class EnemyController : Agent
                 return;
 
             if (gridPosition.x != playerPos.x && gridPosition.y == playerPos.y)
-            {
                 stickToVerticalWall = true;
-            }
             else if (gridPosition.y != playerPos.y && gridPosition.x == playerPos.x)
-            {
                 stickToHorizontalWall = true;
-            }
 
             shouldStopAnimation = true;
             idleTimer = 0f;
@@ -132,7 +125,6 @@ public class EnemyController : Agent
         }
 
         int gridDistance = pathToPlayer.Count - 1;
-
         if (gridDistance > maxGridDistance)
         {
             MoveCloserToPlayer(playerPos);
@@ -146,6 +138,11 @@ public class EnemyController : Agent
         }
 
         MoveAlongPath(pathToPlayer);
+    }
+
+    private int GetManhattanDistance(Vector2Int a, Vector2Int b)
+    {
+        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }
 
     private bool CanSeePlayerInStraightLine(Vector2Int playerPos)
@@ -167,11 +164,9 @@ public class EnemyController : Agent
 
         for (int x = minX + 1; x < maxX; x++)
         {
-            Vector2Int checkPos = new Vector2Int(x, y);
-            if (IsObstacleAt(checkPos))
+            if (IsObstacleAt(new Vector2Int(x, y)))
                 return true;
         }
-
         return false;
     }
 
@@ -183,11 +178,9 @@ public class EnemyController : Agent
 
         for (int y = minY + 1; y < maxY; y++)
         {
-            Vector2Int checkPos = new Vector2Int(x, y);
-            if (IsObstacleAt(checkPos))
+            if (IsObstacleAt(new Vector2Int(x, y)))
                 return true;
         }
-
         return false;
     }
 
@@ -228,24 +221,18 @@ public class EnemyController : Agent
         if (!IsObstacleBetweenColumns(minX, maxX, gridPosition.y))
         {
             stickToVerticalWall = false;
-            
             List<Vector2Int> pathToPlayer = FindPathBFS(gridPosition, playerPos);
             if (pathToPlayer != null && pathToPlayer.Count > 0)
             {
                 MoveAlongPath(pathToPlayer);
             }
-            
             return;
         }
 
         if (playerPos.y > gridPosition.y)
-        {
             MoveWithDirection(Vector2Int.up);
-        }
         else if (playerPos.y < gridPosition.y)
-        {
             MoveWithDirection(Vector2Int.down);
-        }
     }
 
     private void FollowAlongHorizontalWall(Vector2Int playerPos)
@@ -256,24 +243,18 @@ public class EnemyController : Agent
         if (!IsObstacleBetweenRows(minY, maxY, gridPosition.x))
         {
             stickToHorizontalWall = false;
-            
             List<Vector2Int> pathToPlayer = FindPathBFS(gridPosition, playerPos);
             if (pathToPlayer != null && pathToPlayer.Count > 0)
             {
                 MoveAlongPath(pathToPlayer);
             }
-            
             return;
         }
 
         if (playerPos.x > gridPosition.x)
-        {
             MoveWithDirection(Vector2Int.right);
-        }
         else if (playerPos.x < gridPosition.x)
-        {
             MoveWithDirection(Vector2Int.left);
-        }
     }
 
     private bool IsObstacleBetweenColumns(int minX, int maxX, int y)
@@ -294,11 +275,6 @@ public class EnemyController : Agent
                 return true;
         }
         return false;
-    }
-
-    private int GetManhattanDistance(Vector2Int a, Vector2Int b)
-    {
-        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }
 
     private List<Vector2Int> FindPathBFS(Vector2Int start, Vector2Int target)
@@ -438,7 +414,7 @@ public class EnemyController : Agent
 
         GameObject occupier = GridManager.Instance.GetOccupier(newPos);
         if (occupier != null)
-        {
+        {       
             IKillable killable = occupier.GetComponent<IKillable>();
             if (killable != null)
             {
@@ -446,7 +422,6 @@ public class EnemyController : Agent
                 killable.Dead();
                 return true;
             }
-
             return false;
         }
 
@@ -455,7 +430,6 @@ public class EnemyController : Agent
 
         return MoveWithDirection(direction);
     }
-
 
     private bool MoveWithDirection(Vector2Int direction)
     {
@@ -470,7 +444,6 @@ public class EnemyController : Agent
         if (spriteRenderer != null)
         {
             spriteRenderer.flipX = (direction.x < 0);
-
             bool isUpDown = (direction.y != 0);
             if (isUpDown)
                 spriteRenderer.flipY = (direction.y > 0);
@@ -483,7 +456,6 @@ public class EnemyController : Agent
         StartCoroutine(MoveToCell(newPos));
         return true;
     }
-
 
     protected override void OnMoveComplete()
     {
@@ -514,6 +486,7 @@ public class EnemyController : Agent
 
     public override void Dead()
     {
+        isDead = true;
         StartCoroutine(Co_StylishDeath());
     }
 

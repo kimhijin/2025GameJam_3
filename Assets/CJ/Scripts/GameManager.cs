@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -28,14 +29,5 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         Timer += Time.deltaTime;
-    }
-
-    public void GameOver()
-    {
-        if (gameOverFlag)
-            return;
-
-        gameOverFlag = true;
-        _overUI.gameObject.SetActive(true);
     }
 }
