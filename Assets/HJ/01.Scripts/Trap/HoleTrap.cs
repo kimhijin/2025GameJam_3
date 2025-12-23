@@ -7,7 +7,8 @@ public class HoleTrap : MonoBehaviour
     [SerializeField] private Sprite closeImg;
     private SpriteRenderer _spr;
 
-    [SerializeField] private BtnObject[] btnObj;
+    [SerializeField] private BtnObject[] openBtns;
+    [SerializeField] private BtnObject[] closeBtns;
     private bool canKill;
     private int count = 0;
 
@@ -15,26 +16,58 @@ public class HoleTrap : MonoBehaviour
     {
         _spr = GetComponent<SpriteRenderer>();
 
-        foreach(var item in btnObj)
+        foreach(var item in openBtns)
         {
             item.OnEnter += HandleOpenHole;
             item.OnExit += HandleCloseHole;
+        }
+
+        foreach (var item in closeBtns)
+        {
+            item.OnEnter += CBTHandleCloseHole;
+            item.OnExit += CBTHandleOpenHole;
         }
     }
 
     private void OnDestroy()
     {
-        foreach (var item in btnObj)
+
+        foreach (var item in openBtns)
         {
-            item.OnEnter -= HandleOpenHole;
-            item.OnExit -= HandleCloseHole;
+            item.OnEnter += HandleOpenHole;
+            item.OnExit += HandleCloseHole;
         }
+
+        foreach (var item in closeBtns)
+        {
+            item.OnEnter -= CBTHandleCloseHole;
+            item.OnExit -= CBTHandleOpenHole;
+        }
+    }
+
+    private void CBTHandleOpenHole()
+    {
+        ++count;
+        if (count >= openBtns.Length)
+        {
+            _spr.sprite = openImg;
+            gameObject.layer = LayerMask.NameToLayer("Obstacle");
+            canKill = true;
+        }
+    }
+
+    private void CBTHandleCloseHole()
+    {
+        _spr.sprite = closeImg;
+        gameObject.layer = LayerMask.NameToLayer("Default");
+        --count;
+        canKill = false;
     }
 
     private void HandleOpenHole()
     {
         ++count;
-        if(count >= btnObj.Length)
+        if(count >= openBtns.Length)
         {
             _spr.sprite = openImg;
             gameObject.layer = LayerMask.NameToLayer("Obstacle");
