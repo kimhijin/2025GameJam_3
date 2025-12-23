@@ -18,11 +18,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    private void Start()
-    {
-        Timer = 0;
-    }
-
     private void Update()
     {
         Timer += Time.deltaTime;

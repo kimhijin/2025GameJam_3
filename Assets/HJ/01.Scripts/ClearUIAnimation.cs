@@ -118,15 +118,15 @@ public class ClearUIAnimation : MonoBehaviour
         Debug.LogWarning(stageIdx - 1);
         Debug.Assert(StageManager.Instance.clearStageTimers[stageIdx-1] != null, "Sex");
         float timer = StageManager.Instance.clearStageTimers[stageIdx-1];
+        Debug.Log("Current Timer " + timer);
 
         Data data = new Data();
         if (StageManager.Instance.clearStageStarNums[stageIdx-1] <= starCnt)
             data.startCnt = starCnt;
         if (timer >= currentTime)
-        {
-            data.timer = currentTime;
             timer = currentTime;
-        }
+        Debug.Log("Timer "+timer);
+        data.timer = timer;
 
         levelTxt.text = "Stage : " + (stageIdx);
         timerTxt.text = timer.ToString("N2") + "s"; 
