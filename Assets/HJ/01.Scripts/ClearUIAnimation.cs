@@ -23,7 +23,8 @@ public class ClearUIAnimation : MonoBehaviour
 
     private void OnEnable()
     {
-        //currentTime = GameManager.Instance.Timer;
+        Debug.Log("ClearUI Open");
+        currentTime = GameManager.Instance.Timer;
         SpawnStar();
         Time.timeScale = 0;
     }
@@ -49,6 +50,9 @@ public class ClearUIAnimation : MonoBehaviour
             starCnt = 3;
         else if(currentTime <= twoTime)
             starCnt = 2;
+
+        Debug.Log(starCnt);
+        Debug.Log(currentTime);
 
         for(int i =0; i<starCnt; ++i)
         {

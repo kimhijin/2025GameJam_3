@@ -3,23 +3,23 @@ using UnityEngine;
 namespace HJ
 {
     [RequireComponent(typeof(BoxCollider2D))]
-    public class Fruit : MonoBehaviour, IItem
+    public class Cheese : MonoBehaviour, IItem
     {
         [SerializeField] private Sprite eatImg;
-        private SpriteRenderer _spr;
         private Collider2D _col;
+        private Animator _ani;
 
         private void Awake()
         {
             _col = GetComponent<Collider2D>();
-            _spr = GetComponent<SpriteRenderer>();
+            _ani = GetComponent<Animator>();
         }
 
         public void GetItem()
         {
             Debug.Log("GetItme " + gameObject.name);
             MapManager.Instance.CheckFruit();
-            _spr.sprite = eatImg;
+            _ani.SetTrigger("Eat");
             _col.enabled = false;
         }
     }
