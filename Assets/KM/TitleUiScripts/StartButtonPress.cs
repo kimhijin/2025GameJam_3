@@ -8,7 +8,8 @@ public class StartButtonPress : MonoBehaviour
     public void OnStartButtonClicked()
     {
         GetComponent<AudioSource>().Play();
-        DOTween.To(x => audioSource.volume = x, audioSource.volume, 0f, 1f).OnComplete(() =>
+        SceneChangeResner.Instance.Change();
+        DOTween.To(x => audioSource.volume = x, audioSource.volume, 0f, 2f).OnComplete(() =>
         {
             SceneManager.LoadScene("Stage");
         });
