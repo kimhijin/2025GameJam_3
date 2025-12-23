@@ -9,11 +9,11 @@ public class StageManager : MonoBehaviour
     static public StageManager Instance;
     [SerializeField] private int nowStageNum = 0;
     [SerializeField] private List<int> clearStageStarNums = new List<int>();
-    [SerializeField] private List<float> clearStageTimers = new List<float>();
+    public List<float> clearStageTimers = new List<float>();
     [SerializeField] private List<StageUI> StageList = new List<StageUI>();
 
     private int totalClearStage = 0;
-    public int CurrentStage { get; set; } //ÇØ´ç½ºÅ×ÀÌÁö°¡ Indx¹øÈ£¸¦ °¡Áö±âÀ§ÇØ Á¸Àç »ó°ü ¤¤¤¤
+    public int CurrentStage { get; set; } //ï¿½Ø´ç½ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Indxï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void Awake()
     {
         if (Instance == null)
@@ -34,6 +34,8 @@ public class StageManager : MonoBehaviour
         bool active= arg0.name == "Stage";
         foreach(var item in StageList)
         {
+            if(active)
+                LoadData();
             if (item != null)
                 item.gameObject.SetActive(active);
         }
@@ -50,14 +52,19 @@ public class StageManager : MonoBehaviour
         LoadData();
     }
 
-    
-
     public void SaveStage(Data data)
     {
-        //if (!clearStageStarNums.Contains(data.stageNum))
+
+        if(clearStageStarNums.Count + 1 > nowStageNum)
+        {
+            clearStageStarNums[nowStageNum - 1] = data.startCnt;
+            clearStageTimers[nowStageNum - 1] = data.timer;
+        }
+        else
+        {
             clearStageStarNums.Add(data.startCnt);
-        //if(!clearStageTimers.Contains(data.stageNum))
             clearStageTimers.Add(data.timer);
+        }
 
         PlayerPrefs.SetInt("TotalClearStage", clearStageStarNums.Count);
         PlayerPrefs.SetInt("NowStageNum_", nowStageNum);
