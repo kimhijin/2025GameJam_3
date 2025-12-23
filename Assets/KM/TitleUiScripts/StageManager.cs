@@ -13,6 +13,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] private List<StageUI> StageList = new List<StageUI>();
 
     private int totalClearStage = 0;
+    public int CurrentStage;
     private void Awake()
     {
         if (Instance == null)
@@ -33,7 +34,8 @@ public class StageManager : MonoBehaviour
         bool active= arg0.name == "Stage";
         foreach(var item in StageList)
         {
-            item.gameObject.SetActive(active);
+            if (item != null)
+                item.gameObject.SetActive(active);
         }
     }
 

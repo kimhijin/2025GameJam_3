@@ -25,6 +25,6 @@ public class GameOverUI : MonoBehaviour
         agentImg.transform.DOScale(new Vector2(10, 10), 1);
 
         backgrountImg.DOFade(1, 1f)
-            .OnComplete(()=>SceneManager.LoadScene(SceneManager.GetActiveScene().name));
+            .OnComplete(()=>SceneLoadManager.Instance.LoadScene(SceneManager.GetActiveScene().name));
     }
 }
