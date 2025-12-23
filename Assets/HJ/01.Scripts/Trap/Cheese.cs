@@ -18,6 +18,7 @@ namespace HJ
         public void GetItem()
         {
             Debug.Log("GetItme " + gameObject.name);
+            SoundManager.Instance.PlaySFX("Cheese");
             MapManager.Instance.CheckFruit();
             _ani.SetTrigger("Eat");
             gameObject.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().Play();

@@ -5,11 +5,14 @@ public class ScreenFader : MonoBehaviour
 {
     public static ScreenFader Instance { get; private set; }
 
-    [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private GameObject canvas;
+    private CanvasGroup canvasGroup;
     private bool isFading = false;
 
     void Awake()
     {
+        canvasGroup = canvas.GetComponent<CanvasGroup>();
+        canvas.SetActive(false);
         Instance = this;
         canvasGroup.alpha = 0f;
     }
@@ -17,7 +20,7 @@ public class ScreenFader : MonoBehaviour
     public IEnumerator FadeOutCoroutine(float duration)
     {
         if (isFading) yield break;
-
+        canvas.SetActive(true);
         isFading = true;
         float t = 0f;
         while (t < duration)
