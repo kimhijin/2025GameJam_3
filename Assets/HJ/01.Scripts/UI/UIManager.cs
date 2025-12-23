@@ -9,7 +9,7 @@ namespace HJ
     {
         [SerializeField] private GameObject soundUI; //
         [SerializeField] private GameObject settingUI;
-        [SerializeField] private GameObject clearUI; 
+        [SerializeField] private GameObject clearUI;
         [SerializeField] private string nextSceneName;
 
         private void Update()
@@ -21,6 +21,7 @@ namespace HJ
 
         public void HandleNextScene()
         {
+            StageManager.Instance.AddStageNum();
             SoundManager.Instance.PlaySFX("Click");
             SceneLoadManager.Instance.LoadScene(nextSceneName);
         }
