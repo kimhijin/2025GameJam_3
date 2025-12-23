@@ -202,9 +202,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f64ee28d8660424e80b1deb6fd8921e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  one: {fileID: 1474455681074695900}
+  one: {fileID: 1648500698158154939}
   two: {fileID: 4124294088690489799}
-  three: {fileID: 1648500698158154939}
+  three: {fileID: 1474455681074695900}
   go: {fileID: 3044175301361640830}
 --- !u!1 &4487967451311845834
 GameObject:

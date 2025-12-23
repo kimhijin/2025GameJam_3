@@ -13,7 +13,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] private List<StageUI> StageList = new List<StageUI>();
 
     private int totalClearStage = 0;
-    public int CurrentStage;
+    public int CurrentStage { get; set; } //해당스테이지가 Indx번호를 가지기위해 존재 상관 ㄴㄴ
     private void Awake()
     {
         if (Instance == null)
@@ -81,6 +81,10 @@ public class StageManager : MonoBehaviour
             clearStageStarNums.Add(starNum);
             clearStageTimers.Add(timerCount);
             Debug.Log($"Loaded Stage {i}: Stars = {starNum}, Timer = {timerCount}");
+
+            Data data = new Data();
+            data.startCnt = starNum;
+            data.timer = timerCount;
         }
 
         for(int i = 0; i < StageList.Count; i++)
@@ -112,15 +116,15 @@ public class StageManager : MonoBehaviour
     [ContextMenu("AddStageNum")]
     public void AddStageNum()
     {
-        nowStageNum++;
+        nowStageNum = CurrentStage +1;
     }
 
     [ContextMenu("SaveData")]
     public void SaveData()
     {
         Data data = new Data();
-        data.startCnt = Random.Range(1,3);
-        data.timer = Random.Range(10f,20f);
+        data.startCnt = 0;
+        data.timer = 1004;
         SaveStage(data);
     }
 }
