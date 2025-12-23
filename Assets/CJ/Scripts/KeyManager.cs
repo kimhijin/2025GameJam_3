@@ -15,7 +15,6 @@ public class KeyManager : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
     public void AddKey(int amount = 1)
     {
