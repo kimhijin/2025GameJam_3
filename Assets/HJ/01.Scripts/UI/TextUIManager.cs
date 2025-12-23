@@ -6,12 +6,13 @@ public class TextUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelTxt;
     [SerializeField] private TextMeshProUGUI timerTxt;
 
+    [SerializeField] private bool isActive;
     [SerializeField] private bool isClearUI;
     private int stageIdx;
 
     private void Awake()
     {
-        if(gameObject.activeSelf)
+        if(!isActive)
             gameObject.SetActive(false);
         stageIdx = StageManager.Instance.CurrentStage;
     }
@@ -21,6 +22,6 @@ public class TextUIManager : MonoBehaviour
         if (GameManager.Instance == null) return;
 
         levelTxt.text = "스테이지 : "+stageIdx;
-        //timerTxt.text = isClearUI ? GameManager.Instance.Timer.ToString("N2") + "s";
+        //timerTxt.text = isClearUI ? StageManager.Instance. GameManager.Instance.Timer.ToString("N2") + "s";
     }
 }

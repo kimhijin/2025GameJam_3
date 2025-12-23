@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Data
 {
+    public int stageNum;
     public int startCnt;
     public float timer;
 }
@@ -14,8 +15,10 @@ public class MapManager : MonoBehaviour
     [SerializeField] private Cheese[] fruit;
     [SerializeField] private GameObject clearUI;
     private int fruitCnt = 0;
-
+    public bool isClear = false;
     public static MapManager Instance { get; private set; }
+
+    
 
     private void Awake()
     {
@@ -30,9 +33,14 @@ public class MapManager : MonoBehaviour
         ++fruitCnt;
         if(fruitCnt >= fruit.Length)
         {
-            Debug.Log("OpenClearUI");
-            Debug.Assert(clearUI != null, "ClearUI is null");
-            clearUI.SetActive(true);
+            isClear = true;
+            clearUI.SetActive(true); 
+            Debug.Log("Clear!");
+        }
+        else
+        {
+            isClear = false;
+            Debug.Log("NotYet");
         }
     }
 }

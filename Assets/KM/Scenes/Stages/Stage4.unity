@@ -19078,11 +19078,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1937020934228088028, guid: 055318336c94ac84882d1b23e1094ff2, type: 3}
   m_PrefabInstance: {fileID: 20054307}
   m_PrefabAsset: {fileID: 0}
---- !u!225 &400002972 stripped
-CanvasGroup:
-  m_CorrespondingSourceObject: {fileID: 7547351557868603716, guid: 055318336c94ac84882d1b23e1094ff2, type: 3}
-  m_PrefabInstance: {fileID: 20054307}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &418946123
 GameObject:
   m_ObjectHideFlags: 0
@@ -24862,6 +24857,7 @@ MonoBehaviour:
   - {fileID: 1933342444}
   - {fileID: 244715671}
   clearUI: {fileID: 1498568320}
+  isClear: 0
 --- !u!4 &555781459
 Transform:
   m_ObjectHideFlags: 0
@@ -25058,7 +25054,7 @@ MonoBehaviour:
   soundUI: {fileID: 848971648}
   settingUI: {fileID: 1762526791}
   clearUI: {fileID: 1498568320}
-  nextSceneName: 
+  nextSceneName: Stage5
 --- !u!114 &572804564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102992,7 +102988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb0c1316c4f23a4c85b6489f4271f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 400002972}
+  canvas: {fileID: 0}
 --- !u!4 &1751303801
 Transform:
   m_ObjectHideFlags: 0
@@ -103188,9 +103184,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelTxt: {fileID: 1041926822}
-  levelName: Test Level
   timerTxt: {fileID: 156173735}
   isActive: 0
+  isClearUI: 0
 --- !u!224 &1762526793
 RectTransform:
   m_ObjectHideFlags: 0

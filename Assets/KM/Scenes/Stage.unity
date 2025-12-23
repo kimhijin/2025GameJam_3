@@ -737,8 +737,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3b386529c067849bf4115ef637ac17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadSceneName: HJ
+  loadSceneName: Stage3
   active: 0
+  stageIdx: 3
 --- !u!58 &239773054
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2249,8 +2250,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3b386529c067849bf4115ef637ac17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadSceneName: HJ
+  loadSceneName: Stage2
   active: 0
+  stageIdx: 1
 --- !u!58 &553585880
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4519,6 +4521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadSceneName: Stage1
   active: 0
+  stageIdx: 1
 --- !u!58 &751059639
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4999,8 +5002,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3b386529c067849bf4115ef637ac17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadSceneName: HJ
+  loadSceneName: Stage4
   active: 0
+  stageIdx: 4
 --- !u!58 &910227834
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5832,34 +5836,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 842810759550838999, guid: a0229102192163c4da4f3de4e04ec435, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.57
-      objectReference: {fileID: 0}
-    - target: {fileID: 842810759550838999, guid: a0229102192163c4da4f3de4e04ec435, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 842810759550838999, guid: a0229102192163c4da4f3de4e04ec435, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.7700971
-      objectReference: {fileID: 0}
-    - target: {fileID: 842810759550838999, guid: a0229102192163c4da4f3de4e04ec435, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.7700971
-      objectReference: {fileID: 0}
-    - target: {fileID: 842810759550838999, guid: a0229102192163c4da4f3de4e04ec435, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.7700971
-      objectReference: {fileID: 0}
-    - target: {fileID: 842810759550838999, guid: a0229102192163c4da4f3de4e04ec435, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -217.00029
-      objectReference: {fileID: 0}
-    - target: {fileID: 2316112719020949371, guid: a0229102192163c4da4f3de4e04ec435, type: 3}
-      propertyPath: m_SortingOrder
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 4424292456252490970, guid: a0229102192163c4da4f3de4e04ec435, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6453,8 +6429,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e3b386529c067849bf4115ef637ac17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadSceneName: HJ
+  loadSceneName: Stage5
   active: 0
+  stageIdx: 5
 --- !u!58 &1377555849
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7333,15 +7310,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nowStageNum: 1
-  clearStageStarNums: 
-  clearStageTimers: []
+  clearStageStarNums: 00000000
+  clearStageTimers:
+  - 0
   StageList:
   - {fileID: 751059638}
   - {fileID: 553585879}
   - {fileID: 239773053}
   - {fileID: 910227833}
   - {fileID: 1377555848}
-  CurrentStage: 0
 --- !u!1 &1978498387
 GameObject:
   m_ObjectHideFlags: 0
