@@ -143,7 +143,10 @@ public class PlayerController : Agent
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isDead) return;
-        
+        if (collision.GetComponent<IKillable>() != null)
+        {
+            Dead();
+        }
         if(collision.TryGetComponent<IItem>(out IItem item))
         {
             item.GetItem();
