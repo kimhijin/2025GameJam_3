@@ -7309,10 +7309,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf5b7ca9c58bbb44854bfa0630a52b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowStageNum: 1
-  clearStageStarNums: 00000000
-  clearStageTimers:
-  - 0
+  nowStageNum: 0
+  clearStageStarNums: 
+  clearStageTimers: []
   StageList:
   - {fileID: 751059638}
   - {fileID: 553585879}
