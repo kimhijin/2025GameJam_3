@@ -38,7 +38,7 @@ namespace HJ
 
         public void HandleMapScene()
         {
-            //½ºÅ×ÀÌÁö °í¸£´Â ¾ÀÀ¸·Î ¤¡¤¡
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             SoundManager.Instance.PlaySFX("Click");
             SceneLoadManager.Instance.LoadScene("Stage");
             Time.timeScale = 1;

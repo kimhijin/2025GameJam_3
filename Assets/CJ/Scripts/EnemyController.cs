@@ -444,8 +444,7 @@ public class EnemyController : Agent
         if (spriteRenderer != null)
         {
             spriteRenderer.flipX = (direction.x < 0);
-            bool isUpDown = (direction.y != 0);
-            if (isUpDown)
+            if (direction.y != 0)
                 spriteRenderer.flipY = (direction.y > 0);
         }
 
@@ -453,7 +452,7 @@ public class EnemyController : Agent
         shouldStopAnimation = false;
         idleTimer = 0f;
 
-        StartCoroutine(MoveToCell(newPos));
+        StartCoroutine(MoveToCell(newPos, direction));
         return true;
     }
 
