@@ -6,6 +6,7 @@ public class ScreenFader : MonoBehaviour
     public static ScreenFader Instance { get; private set; }
 
     [SerializeField] private CanvasGroup canvasGroup;
+    private bool isFading = false;
 
     void Awake()
     {
@@ -15,6 +16,9 @@ public class ScreenFader : MonoBehaviour
 
     public IEnumerator FadeOutCoroutine(float duration)
     {
+        if (isFading) yield break;
+
+        isFading = true;
         float t = 0f;
         while (t < duration)
         {
@@ -23,5 +27,6 @@ public class ScreenFader : MonoBehaviour
             yield return null;
         }
         canvasGroup.alpha = 1f;
+        isFading = false;
     }
 }
