@@ -56455,6 +56455,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3340552194225628745, guid: cf8fb7ae90726a84f99e74ae6c56cc31, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 69226597}
+    - target: {fileID: 3340552194225628745, guid: cf8fb7ae90726a84f99e74ae6c56cc31, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HandleCloseVolum
+      objectReference: {fileID: 0}
     - target: {fileID: 5180914648124399160, guid: cf8fb7ae90726a84f99e74ae6c56cc31, type: 3}
       propertyPath: m_Name
       value: SettingUI
@@ -56462,6 +56470,14 @@ PrefabInstance:
     - target: {fileID: 5337609251633690383, guid: cf8fb7ae90726a84f99e74ae6c56cc31, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5396386904319377234, guid: cf8fb7ae90726a84f99e74ae6c56cc31, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 69226597}
+    - target: {fileID: 5396386904319377234, guid: cf8fb7ae90726a84f99e74ae6c56cc31, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HandleExit
       objectReference: {fileID: 0}
     - target: {fileID: 5740201519181559136, guid: cf8fb7ae90726a84f99e74ae6c56cc31, type: 3}
       propertyPath: m_AnchorMax.x
