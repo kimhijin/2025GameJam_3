@@ -523,7 +523,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1000
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!224 &69226601
 RectTransform:
@@ -56459,37 +56459,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingUI
       objectReference: {fileID: 0}
-    - target: {fileID: 5180914648124399160, guid: cf8fb7ae90726a84f99e74ae6c56cc31, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5337609251633690383, guid: cf8fb7ae90726a84f99e74ae6c56cc31, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5740201519181559136, guid: cf8fb7ae90726a84f99e74ae6c56cc31, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.495
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5740201519181559136, guid: cf8fb7ae90726a84f99e74ae6c56cc31, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5740201519181559136, guid: cf8fb7ae90726a84f99e74ae6c56cc31, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.495
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7857668528376760267, guid: cf8fb7ae90726a84f99e74ae6c56cc31, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.495
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7857668528376760267, guid: cf8fb7ae90726a84f99e74ae6c56cc31, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8143950735286050087, guid: cf8fb7ae90726a84f99e74ae6c56cc31, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -63963,7 +63959,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 955004994303474593, guid: 055318336c94ac84882d1b23e1094ff2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1937020934228088028, guid: 055318336c94ac84882d1b23e1094ff2, type: 3}
       propertyPath: m_Pivot.x
@@ -64089,7 +64085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1323608302290100191, guid: a603142a8fe84694fac4af129603f4a6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1474455681074695900, guid: a603142a8fe84694fac4af129603f4a6, type: 3}
       propertyPath: m_Color.a
@@ -65903,7 +65899,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1248689196401405048, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3366924789912531899, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
       propertyPath: isClearUI
@@ -65917,6 +65913,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 69226597}
+    - target: {fileID: 5769187457107173242, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
+      propertyPath: twoTime
+      value: 16.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769187457107173242, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
+      propertyPath: stageIdx
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769187457107173242, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
+      propertyPath: threeTime
+      value: 13.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8936327524537799924, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

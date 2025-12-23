@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TextUIManager : MonoBehaviour
 {
-    //ClearUI¿¡´Â Àý´ë ³ÖÀ¸¸é ¾ÈµÅ¤À¤À¤À
+    //ClearUIï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÅ¤ï¿½ï¿½ï¿½ï¿½ï¿½
     [SerializeField] private TextMeshProUGUI levelTxt;
     [SerializeField] private TextMeshProUGUI timerTxt;
     private int stageIdx;
@@ -11,12 +11,12 @@ public class TextUIManager : MonoBehaviour
     private void Awake()
     {
         gameObject.SetActive(false);
-        stageIdx = StageManager.Instance.CurrentStage;
     }
 
     private void OnEnable()
     {
         if (GameManager.Instance == null) return;
+        stageIdx = StageManager.Instance.CurrentStage;
 
         levelTxt.text = "Stage : "+stageIdx;
         timerTxt.text = GameManager.Instance.Timer.ToString("N2") + "s";
