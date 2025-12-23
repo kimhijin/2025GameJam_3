@@ -132,6 +132,23 @@ public class StageManager : MonoBehaviour
             nowStageNum = CurrentStage + 1;
         }
     }
+    
+    
+    #region  Never Use This KHJ.
+    [ContextMenu("AddStageNumTest")]
+    public void TestCurrentStageNum()
+    {
+        CurrentStage += 1;
+        Debug.Log(CurrentStage);
+    }
+
+    [ContextMenu("MinusStageNumTest")]
+    public void MinusStageNumTest()
+    {
+        CurrentStage -= 1;
+        Debug.Log(CurrentStage);
+    }
+    #endregion
 
     [ContextMenu("SaveData")]
     public void SaveData()
