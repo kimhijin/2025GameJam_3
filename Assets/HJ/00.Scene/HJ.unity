@@ -1584,7 +1584,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.3}
     oldSize: {x: 8, y: 4.5}
     newSize: {x: 8, y: 4.5}
     adaptiveTilingThreshold: 0.5
@@ -1868,7 +1868,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e8ed188f2168a44eb2ebc7abe2d0e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _overUI: {fileID: 639244789}
 --- !u!1 &1288613357 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6024266382101294299, guid: 9db361d5e0d2e7d408d580ef288eaf9e, type: 3}
@@ -2406,17 +2405,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1409801693 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7993453574997830283, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
-  m_PrefabInstance: {fileID: 1901487963}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1654710399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2606,17 +2594,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1199326587113624798, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -50
-      objectReference: {fileID: 0}
     - target: {fileID: 1248689196401405048, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
       propertyPath: m_Name
       value: ClearUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 1248689196401405048, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3849754216517894548, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2626,10 +2606,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2054446885}
-    - target: {fileID: 5769187457107173242, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
-      propertyPath: goodImg
-      value: 
-      objectReference: {fileID: 1409801693}
     - target: {fileID: 8936327524537799924, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

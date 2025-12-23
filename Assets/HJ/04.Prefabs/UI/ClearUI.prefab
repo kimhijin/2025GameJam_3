@@ -462,6 +462,7 @@ MonoBehaviour:
   - {fileID: 4556317463789544516}
   - {fileID: 3849754216517894548}
   - {fileID: 8936327524537799924}
+  goodImg: {fileID: 7993453574997830283}
 --- !u!114 &3366924789912531899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -907,7 +908,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -20}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 50}
+  m_AnchoredPosition: {x: -50, y: 50}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5092102588989800486
