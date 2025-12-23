@@ -36,16 +36,19 @@ public class StageManager : MonoBehaviour
 
     private void StageActive(Scene arg0, LoadSceneMode arg1)
     {
-        bool active= arg0.name == "Stage";
-        foreach(var item in StageList)
+        bool active = arg0.name == "Stage";
+
+        for (int i = 0; i < StageList.Count; i++)
         {
-            if (item != null)
+            StageList[i].gameObject.SetActive(active);
+            if (active)
             {
-                item.gameObject.SetActive(active);
-                if (active)
-                    LoadData();
+                StageList[i].GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1f);
+                StageList[i].active = false;
+                Debug.Log(StageList[i].enabled);
             }
         }
+        LoadData();
     }
 
     private void Start()
