@@ -38,6 +38,7 @@ namespace HJ
         {
             //스테이지 고르는 씬으로 ㄱㄱ
             SceneManager.LoadScene("Stage");
+            Time.timeScale = 1;
         }
 
         public void HandleOpenVolum()
