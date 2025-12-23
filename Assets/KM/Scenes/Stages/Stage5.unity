@@ -30106,8 +30106,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1123988593}
     - target: {fileID: 5769187457107173242, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
+      propertyPath: twoTime
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769187457107173242, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
       propertyPath: stageIdx
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769187457107173242, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
+      propertyPath: threeTime
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5769187457107173242, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
       propertyPath: btns.Array.size
