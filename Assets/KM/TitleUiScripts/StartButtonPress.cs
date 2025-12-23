@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartButtonPress : MonoBehaviour
 {
@@ -7,6 +8,10 @@ public class StartButtonPress : MonoBehaviour
     public void OnStartButtonClicked()
     {
         GetComponent<AudioSource>().Play();
-        DOTween.To(x => audioSource.volume = x, audioSource.volume, 0f, 1f);
+        SceneChangeResner.Instance.Change();
+        DOTween.To(x => audioSource.volume = x, audioSource.volume, 0f, 2f).OnComplete(() =>
+        {
+            SceneManager.LoadScene("Stage");
+        });
     }
 }
