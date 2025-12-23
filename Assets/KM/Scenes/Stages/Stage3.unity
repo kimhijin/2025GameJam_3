@@ -41198,8 +41198,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 572804563}
     - target: {fileID: 5769187457107173242, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
+      propertyPath: twoTime
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769187457107173242, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
       propertyPath: stageIdx
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769187457107173242, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
+      propertyPath: threeTime
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8936327524537799924, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
