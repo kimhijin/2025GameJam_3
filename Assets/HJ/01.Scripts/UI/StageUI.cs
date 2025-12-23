@@ -7,11 +7,15 @@ public class StageUI : MonoBehaviour
 {
     [SerializeField] private string loadSceneName;
     public bool active;
+    [SerializeField] private int stageIdx;
 
     private void OnMouseDown()
     {
         if(active)
+        {
+            StageManager.Instance.CurrentStage = stageIdx;
             SceneLoadManager.Instance.LoadScene(loadSceneName);
+        }
     }
 
     private void OnMouseEnter()
