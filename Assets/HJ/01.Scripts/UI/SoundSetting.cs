@@ -14,6 +14,7 @@ public class SoundSetting : MonoBehaviour
 
     private void OnEnable()
     {
+        SoundManager.Instance.LoadVolum();
         sfxSlider.value = SoundManager.Instance.sfxVolume;
         bgmSlider.value = SoundManager.Instance.bgmVolume;
     }
@@ -27,12 +28,12 @@ public class SoundSetting : MonoBehaviour
     public void ChangeSFX()
     {
         float volum = sfxSlider.value;
-        SoundManager.Instance.SetSFXVolume(volum);
+        SoundManager.Instance.SetSFXVolume(sfxSlider.value);
     }
 
     public void ChangeBGM()
     {
         float volum = bgmSlider.value;
-        SoundManager.Instance.SetSFXVolume(volum);
+        SoundManager.Instance.SetBGMVolume(volum);
     }
 }

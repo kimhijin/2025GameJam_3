@@ -10,6 +10,7 @@ namespace HJ
         private void Awake()
         {
             _spr = GetComponent<SpriteRenderer>();
+            deadImg ??= _spr.sprite;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

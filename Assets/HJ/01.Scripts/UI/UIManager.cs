@@ -9,19 +9,20 @@ namespace HJ
     {
         [SerializeField] private GameObject soundUI; //
         [SerializeField] private GameObject settingUI;
-        [SerializeField] private GameObject clearUI;
+        [SerializeField] private GameObject clearUI; 
         [SerializeField] private string nextSceneName;
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape) && !clearUI.activeSelf)
-                ActiveSetting();    
+                ActiveSetting();
         }
 
 
         public void HandleNextScene()
         {
-            SceneManager.LoadScene(nextSceneName);
+            SoundManager.Instance.PlaySFX("Click");
+            SceneLoadManager.Instance.LoadScene(nextSceneName);
         }
 
         public void HandleExit()
@@ -31,13 +32,15 @@ namespace HJ
 
         public void HandleRestart()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SoundManager.Instance.PlaySFX("Click");
+            SceneLoadManager.Instance.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         public void HandleMapScene()
         {
             //스테이지 고르는 씬으로 ㄱㄱ
-            SceneManager.LoadScene("Stage");
+            SoundManager.Instance.PlaySFX("Click");
+            SceneLoadManager.Instance.LoadScene("Stage");
             Time.timeScale = 1;
         }
 
@@ -51,9 +54,8 @@ namespace HJ
             soundUI.SetActive(false);
         }
 
-        public void ActiveSetting()
+        private void ActiveSetting()
         {
-            Debug.Log("Input Esc");
             if(settingUI.activeSelf == false)
             {
                 settingUI.SetActive(true);
@@ -64,6 +66,12 @@ namespace HJ
                 settingUI.SetActive(false);
                 Time.timeScale = 1;
             }
+        }
+
+        public void HandleSetting()
+        {
+            SoundManager.Instance.PlaySFX("Click");
+            ActiveSetting();
         }
     }
 }
