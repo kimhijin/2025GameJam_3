@@ -65216,9 +65216,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelTxt: {fileID: 800275588}
-  levelName: Test Level
   timerTxt: {fileID: 1697485782}
-  isActive: 0
+  isClearUI: 0
 --- !u!224 &1882857824
 RectTransform:
   m_ObjectHideFlags: 0
