@@ -45,7 +45,7 @@ namespace HJ
                 
 
                 _spr.sprite = openImg;
-                _col.enabled = false;
+                _col.enabled = false;   
             }
         }
     }
