@@ -137,16 +137,16 @@ public class PlayerController : Agent
 
         Time.timeScale = 1f;
 
-        if (GameManager.Instance != null)
-            GameManager.Instance.GameOver();
-
         Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isDead) return; // ✅ 죽음 후 아이템 수집 방지
-        
+        if (isDead) return;
+        if (collision.GetComponent<IKillable>() != null)
+        {
+            Dead();
+        }
         if(collision.TryGetComponent<IItem>(out IItem item))
         {
             item.GetItem();
