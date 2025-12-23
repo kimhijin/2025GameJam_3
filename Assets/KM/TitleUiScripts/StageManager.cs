@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,6 +17,10 @@ public class StageManager : MonoBehaviour
     public int CurrentStage { get; set; } //�ش罺�������� Indx��ȣ�� ���������� ���� ��� ����
     private void Awake()
     {
+        if(PlayerPrefs.GetInt("TotalClearStage", -1) == -1)
+        {
+            ClearAllData();
+        }
         if (Instance == null)
         {
             Instance = this;
@@ -35,9 +40,11 @@ public class StageManager : MonoBehaviour
         foreach(var item in StageList)
         {
             if (item != null)
+            {
                 item.gameObject.SetActive(active);
-            if (active)
-                LoadData();
+                if (active)
+                    LoadData();
+            }
         }
     }
 
@@ -81,19 +88,15 @@ public class StageManager : MonoBehaviour
     {
         clearStageStarNums.Clear();
         clearStageTimers.Clear();
-        nowStageNum = PlayerPrefs.GetInt("NowStageNum_", 0);
+        nowStageNum = PlayerPrefs.GetInt("NowStageNum_", 1);
         totalClearStage = PlayerPrefs.GetInt("TotalClearStage", 0);
         for (int i = 0; i < totalClearStage; i++)
         {
             int starNum = PlayerPrefs.GetInt($"ClearStageStarNums_{i}", 0);
-            float timerCount = PlayerPrefs.GetFloat($"ClearStageTimerCount_{i}", 0f);
+            float timerCount = PlayerPrefs.GetFloat($"ClearStageTimerCount_{i}", int.MaxValue);
             clearStageStarNums.Add(starNum);
             clearStageTimers.Add(timerCount);
             Debug.Log($"Loaded Stage {i}: Stars = {starNum}, Timer = {timerCount}");
-
-            Data data = new Data();
-            data.startCnt = starNum;
-            data.timer = timerCount;
         }
 
         for(int i = 0; i < StageList.Count; i++)
@@ -107,6 +110,11 @@ public class StageManager : MonoBehaviour
                 for(int j = 0; j < clearStageStarNums[i]; j++)
                 {
                     starparent.transform.GetChild(j).gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+                }
+                if(clearStageTimers[i] == int.MaxValue)
+                {
+                    timerparent.GetComponent<TMP_Text>().text = " ";
+                    continue;
                 }
                 timerparent.GetComponent<TMP_Text>().text = clearStageTimers[i].ToString("F2") + "s";
             }
@@ -155,7 +163,7 @@ public class StageManager : MonoBehaviour
     {
         Data data = new Data();
         data.startCnt = 0;
-        data.timer = 0;
+        data.timer = int.MaxValue;
         SaveStage(data);
     }
 }
