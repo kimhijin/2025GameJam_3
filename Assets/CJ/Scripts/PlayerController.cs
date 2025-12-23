@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class PlayerController : Agent
 {
-    [SerializeField] private float moveInterval = 0.2f;
+    [SerializeField] private float moveInterval = 0.1f;
     [SerializeField] private AnimatorOverrideController playerAnimatorOverride;
 
     private float moveTimer = 0f;
     private Vector2Int bufferedDirection = Vector2Int.zero;
     public Vector2Int LastDirection { get; private set; } = Vector2Int.right;
+    
+    private bool isDead = false;
 
     public int itemsCollected { get; private set; } = 0;
 
@@ -21,7 +23,6 @@ public class PlayerController : Agent
         spriteRenderer = GetComponent<SpriteRenderer>();
         LastDirection = Vector2Int.right;
 
-        // Animator Override 설정
         if (animator != null && playerAnimatorOverride != null)
         {
             animator.runtimeAnimatorController = playerAnimatorOverride;
@@ -31,6 +32,7 @@ public class PlayerController : Agent
     protected override void Update()
     {
         base.Update();
+        if (isDead) return;
 
         ReadInputToBuffer();
 
@@ -46,13 +48,12 @@ public class PlayerController : Agent
                     UpdateFlip();
                     TryMove(bufferedDirection);
                 }
-
+                
                 bufferedDirection = Vector2Int.zero;
                 moveTimer = 0f;
             }
         }
 
-        // IsMoving 상태 변화 감지
         if (isMoving != wasMovingLastFrame)
         {
             UpdateAnimatorParameters();
@@ -62,6 +63,8 @@ public class PlayerController : Agent
 
     private void ReadInputToBuffer()
     {
+        if (isMoving || isDead) return;
+
         Vector2Int moveDirection = Vector2Int.zero;
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
@@ -103,14 +106,9 @@ public class PlayerController : Agent
         }
     }
 
-
-    public void CollectItem()
-    {
-        itemsCollected++;
-        Debug.Log("아이템 획득! 총: " + itemsCollected);
-    }
     public override void Dead()
     {
+        isDead = true;
         StartCoroutine(Co_StylishDeath());
     }
 
@@ -144,8 +142,11 @@ public class PlayerController : Agent
 
         Destroy(gameObject);
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isDead) return; // ✅ 죽음 후 아이템 수집 방지
+        
         if(collision.TryGetComponent<IItem>(out IItem item))
         {
             item.GetItem();
