@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b4f23ca26b8231a418de8eb5ea45a2e7
+guid: 1ae319de39eecb3439aa8e7e1b0f47dd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 460402656023440085
-    second: image-removebg-preview (21)_0
+      213: 5903094720073297322
+    second: RockPit_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: image-removebg-preview (21)_0
+      name: RockPit_0
       rect:
         serializedVersion: 2
-        x: 61
+        x: 0
         y: 0
-        width: 378
-        height: 500
+        width: 394
+        height: 518
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5da6cedb6cda36600800000000000000
-      internalID: 460402656023440085
+      spriteID: aade3793f510ce150800000000000000
+      internalID: 5903094720073297322
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      image-removebg-preview (21)_0: 460402656023440085
+      RockPit_0: 5903094720073297322
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
