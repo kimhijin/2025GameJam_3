@@ -92,7 +92,7 @@ public class ClearUIAnimation : MonoBehaviour
     private void ShowGoodPng()
     {
         goodImg.DOFade(1, 0.2f);
-        goodImg.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(Ease.InSine)
+        goodImg.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(Ease.InSine).SetUpdate(true)
             .OnComplete(()=>StartCoroutine(ContinueRotation(goodImg.gameObject, true)));
     }
 
