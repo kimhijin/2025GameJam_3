@@ -5,9 +5,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    private bool gameOverFlag = false;
-
-    [SerializeField] private GameOverUI _overUI;
     public float Timer { get; private set; }
 
     private void Awake()
