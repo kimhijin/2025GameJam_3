@@ -414,7 +414,7 @@ public class EnemyController : Agent
 
         GameObject occupier = GridManager.Instance.GetOccupier(newPos);
         if (occupier != null)
-        {
+        {       
             IKillable killable = occupier.GetComponent<IKillable>();
             if (killable != null)
             {
