@@ -18,12 +18,6 @@ public class GameManager : MonoBehaviour
         }
         else
             Destroy(gameObject);
-        //if (Instance != null && Instance != this)
-        //{
-        //    Destroy(gameObject);
-        //    return;
-        //}
-        //Instance = this;
     }
 
     private void Start()

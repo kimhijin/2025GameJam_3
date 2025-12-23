@@ -51,9 +51,6 @@ public class ClearUIAnimation : MonoBehaviour
         else if(currentTime <= twoTime)
             starCnt = 2;
 
-        Debug.Log(starCnt);
-        Debug.Log(currentTime);
-
         for(int i =0; i<starCnt; ++i)
         {
             GameObject star= Instantiate(starObj, starParent);
@@ -65,6 +62,8 @@ public class ClearUIAnimation : MonoBehaviour
                     ShowBtn(); 
                 });
         }
+
+        SaveData(starCnt);
     }
 
     private IEnumerator ContinueRotation(GameObject rotationObj)
@@ -90,8 +89,12 @@ public class ClearUIAnimation : MonoBehaviour
         }
     }
 
-    private void TimeUI()
+    private void SaveData(int starCnt)
     {
+        Data data = new Data();
+        data.startCnt = starCnt;
+        data.timer = currentTime;
 
-    }    
+        StageManager.Instance.SaveStage(data);
+    }
 }
