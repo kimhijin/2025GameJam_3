@@ -3,17 +3,14 @@ using UnityEngine;
 
 public class TextUIManager : MonoBehaviour
 {
+    //ClearUI에는 절대 넣으면 안돼ㅐㅐㅐ
     [SerializeField] private TextMeshProUGUI levelTxt;
     [SerializeField] private TextMeshProUGUI timerTxt;
-
-    [SerializeField] private bool isActive;
-    [SerializeField] private bool isClearUI;
     private int stageIdx;
 
     private void Awake()
     {
-        if(!isActive)
-            gameObject.SetActive(false);
+        gameObject.SetActive(false);
         stageIdx = StageManager.Instance.CurrentStage;
     }
 
@@ -22,6 +19,6 @@ public class TextUIManager : MonoBehaviour
         if (GameManager.Instance == null) return;
 
         levelTxt.text = "스테이지 : "+stageIdx;
-        //timerTxt.text = isClearUI ? StageManager.Instance. GameManager.Instance.Timer.ToString("N2") + "s";
+        timerTxt.text = GameManager.Instance.Timer.ToString("N2") + "s";
     }
 }
