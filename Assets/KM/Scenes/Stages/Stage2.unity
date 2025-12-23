@@ -18503,6 +18503,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4008983939544806513, guid: b8aa2fe6f15b33249b1f35011c9366a8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8884431731110258906, guid: b8aa2fe6f15b33249b1f35011c9366a8, type: 3}
       propertyPath: m_Name
       value: Lock
@@ -63242,6 +63246,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2208594751126695452, guid: fc01780e3513e6744a4de8423c870d98, type: 3}
+      propertyPath: m_Name
+      value: Hole
+      objectReference: {fileID: 0}
     - target: {fileID: 8846700304050712194, guid: fc01780e3513e6744a4de8423c870d98, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8
@@ -63281,10 +63289,6 @@ PrefabInstance:
     - target: {fileID: 8846700304050712194, guid: fc01780e3513e6744a4de8423c870d98, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2208594751126695452, guid: fc01780e3513e6744a4de8423c870d98, type: 3}
-      propertyPath: m_Name
-      value: Hole
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
