@@ -14,7 +14,9 @@ public class ClearUIAnimation : MonoBehaviour
     private float currentTime;
 
     [Header("버튼")]
-    [SerializeField] private Button[] btns; //순서 상관 ㄴㄴ
+    [SerializeField] private Button[] btns; //순서 상관 
+
+    [SerializeField] private Image goodImg;
 
     private void Awake()
     {
@@ -39,6 +41,8 @@ public class ClearUIAnimation : MonoBehaviour
             item.image.color = cor;
         }
 
+        goodImg.color = new Color(1, 1, 1, 0);
+        goodImg.transform.localScale = new Vector3(10, 10, 1);
         gameObject.SetActive(false);
     }
 
@@ -58,26 +62,38 @@ public class ClearUIAnimation : MonoBehaviour
             star.transform.DOScale(1, 0.7f).SetUpdate(true).SetEase(Ease.InSine)
                 .OnComplete(()=>
                 { 
-                    StartCoroutine(ContinueRotation(star));  
-                    ShowBtn(); 
+                    StartCoroutine(ContinueRotation(star,false));  
+                    ShowBtn();
+                    ShowGoodPng();
                 });
         }
 
         SaveData(starCnt);
     }
 
-    private IEnumerator ContinueRotation(GameObject rotationObj)
+    private IEnumerator ContinueRotation(GameObject rotationObj, bool right)
     {
         float t = 0;
         while(true)
         {
             t += Time.unscaledDeltaTime/2;
             t = t % 1;
-            float angle = Mathf.Lerp(0f, 360f, t);
+            float angle;
+            if (right)
+                angle = Mathf.Lerp(0f, 360f, t);
+            else
+                angle = Mathf.Lerp(360f, 0f, t);
 
-            rotationObj.transform.localRotation = Quaternion.Euler(0, 0, angle);
+                rotationObj.transform.localRotation = Quaternion.Euler(0, 0, angle);
             yield return null;
         }
+    }
+
+    private void ShowGoodPng()
+    {
+        goodImg.DOFade(1, 0.2f);
+        goodImg.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(Ease.InSine)
+            .OnComplete(()=>StartCoroutine(ContinueRotation(goodImg.gameObject, true)));
     }
 
     private void ShowBtn()
@@ -95,6 +111,6 @@ public class ClearUIAnimation : MonoBehaviour
         data.startCnt = starCnt;
         data.timer = currentTime;
 
-        StageManager.Instance.SaveStage(data);
+        StageManager.Instance.SaveStage(data);  
     }
 }

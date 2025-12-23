@@ -11,7 +11,7 @@ public class StageUI : MonoBehaviour
     private void OnMouseDown()
     {
         if(active)
-            SceneManager.LoadScene(loadSceneName);
+            SceneLoadManager.Instance.LoadScene(loadSceneName);
     }
 
     private void OnMouseEnter()
