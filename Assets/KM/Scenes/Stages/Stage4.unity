@@ -177,6 +177,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOverUI
       objectReference: {fileID: 0}
+    - target: {fileID: 955004994303474593, guid: 055318336c94ac84882d1b23e1094ff2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1937020934228088028, guid: 055318336c94ac84882d1b23e1094ff2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -788,8 +792,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00s
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 41ce764a2018eb640948e654f60b94d4, type: 2}
+  m_sharedMaterial: {fileID: 7369691294232994010, guid: 41ce764a2018eb640948e654f60b94d4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -829,7 +833,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -881,8 +885,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 25.000004}
-  m_SizeDelta: {x: 600, y: 50}
+  m_AnchoredPosition: {x: 0, y: 15}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &162860998
 GameObject:
@@ -7344,6 +7348,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingUI
       objectReference: {fileID: 0}
+    - target: {fileID: 1909377278265966051, guid: 9db361d5e0d2e7d408d580ef288eaf9e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2014472686863639788, guid: 9db361d5e0d2e7d408d580ef288eaf9e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7719,8 +7727,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Stage : 5'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d86e933e6ca983a45ad912f7d7fa9882, type: 2}
-  m_sharedMaterial: {fileID: -5660775149628104760, guid: d86e933e6ca983a45ad912f7d7fa9882, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 41ce764a2018eb640948e654f60b94d4, type: 2}
+  m_sharedMaterial: {fileID: 7369691294232994010, guid: 41ce764a2018eb640948e654f60b94d4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12151,6 +12159,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClearUI
       objectReference: {fileID: 0}
+    - target: {fileID: 1248689196401405048, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3849754216517894548, guid: 36b43507f5b9e1e4fa1bb6e22868e614, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -13314,8 +13326,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelTxt: {fileID: 1041926822}
   timerTxt: {fileID: 156173735}
-  isActive: 0
-  isClearUI: 0
 --- !u!224 &1762526793
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13453,10 +13463,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stop
+  m_text: Current Time
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 41ce764a2018eb640948e654f60b94d4, type: 2}
+  m_sharedMaterial: {fileID: 7369691294232994010, guid: 41ce764a2018eb640948e654f60b94d4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

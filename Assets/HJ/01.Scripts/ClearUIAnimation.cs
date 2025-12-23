@@ -125,7 +125,7 @@ public class ClearUIAnimation : MonoBehaviour
             timer = currentTime;
         }
 
-        levelTxt.text = "스테이지 : " + stageIdx;
+        levelTxt.text = "Stage : " + stageIdx;
         timerTxt.text = timer.ToString("N2") + "s";
 
         StageManager.Instance.AddStageNum();

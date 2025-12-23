@@ -18,7 +18,7 @@ public class TextUIManager : MonoBehaviour
     {
         if (GameManager.Instance == null) return;
 
-        levelTxt.text = "스테이지 : "+stageIdx;
+        levelTxt.text = "Stage : "+stageIdx;
         timerTxt.text = GameManager.Instance.Timer.ToString("N2") + "s";
     }
 }

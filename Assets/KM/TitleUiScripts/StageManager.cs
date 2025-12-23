@@ -34,10 +34,10 @@ public class StageManager : MonoBehaviour
         bool active= arg0.name == "Stage";
         foreach(var item in StageList)
         {
-            if(active)
-                LoadData();
             if (item != null)
                 item.gameObject.SetActive(active);
+            if (active)
+                LoadData();
         }
     }
 

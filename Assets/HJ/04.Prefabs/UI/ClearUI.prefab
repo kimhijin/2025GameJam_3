@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10.5
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a43cddd9c6790fc43a52920fd313c284, type: 2}
-  m_sharedMaterial: {fileID: 7369691294232994010, guid: a43cddd9c6790fc43a52920fd313c284, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 41ce764a2018eb640948e654f60b94d4, type: 2}
+  m_sharedMaterial: {fileID: 7369691294232994010, guid: 41ce764a2018eb640948e654f60b94d4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -292,10 +292,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAE30\uB85D"
+  m_text: Best Score
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a43cddd9c6790fc43a52920fd313c284, type: 2}
-  m_sharedMaterial: {fileID: 7369691294232994010, guid: a43cddd9c6790fc43a52920fd313c284, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 41ce764a2018eb640948e654f60b94d4, type: 2}
+  m_sharedMaterial: {fileID: 7369691294232994010, guid: 41ce764a2018eb640948e654f60b94d4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -411,7 +411,6 @@ GameObject:
   m_Component:
   - component: {fileID: 898448445584799951}
   - component: {fileID: 5769187457107173242}
-  - component: {fileID: 3366924789912531899}
   m_Layer: 5
   m_Name: ClearUI
   m_TagString: Untagged
@@ -463,22 +462,8 @@ MonoBehaviour:
   - {fileID: 3849754216517894548}
   - {fileID: 8936327524537799924}
   goodImg: {fileID: 7993453574997830283}
---- !u!114 &3366924789912531899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1248689196401405048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 917a34b6f727a654b99af84b5a6e13b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   levelTxt: {fileID: 2806782210179959852}
-  levelName: Just Test Level
   timerTxt: {fileID: 6331777651308516899}
-  isActive: 1
 --- !u!1 &2004753255789345476
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,10 +529,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC2A4\uD14C\uC774\uC9C0 - 5"
+  m_text: "\uC2A4\uD14C\uC774\uC9C0 : 5"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a43cddd9c6790fc43a52920fd313c284, type: 2}
-  m_sharedMaterial: {fileID: 7369691294232994010, guid: a43cddd9c6790fc43a52920fd313c284, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 41ce764a2018eb640948e654f60b94d4, type: 2}
+  m_sharedMaterial: {fileID: 7369691294232994010, guid: 41ce764a2018eb640948e654f60b94d4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
