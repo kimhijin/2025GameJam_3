@@ -5,7 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class Data
 {
-    public int stageNum;
     public int startCnt;
     public float timer;
 }
