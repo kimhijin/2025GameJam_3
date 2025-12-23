@@ -1,5 +1,6 @@
 using DG.Tweening;
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,15 +13,21 @@ public class ClearUIAnimation : MonoBehaviour
     [SerializeField] private GameObject starObj;
     [SerializeField] private RectTransform starParent;
     private float currentTime;
+    private int stageIdx;
 
     [Header("버튼")]
     [SerializeField] private Button[] btns; //순서 상관 
 
     [SerializeField] private Image goodImg;
 
+    [Header("기록")]
+    [SerializeField] private TextMeshProUGUI levelTxt;
+    [SerializeField] private TextMeshProUGUI timerTxt;
+
     private void Awake()
     {
         Init();
+        stageIdx = StageManager.Instance.CurrentStage;
     }
 
     private void OnEnable()
@@ -107,11 +114,22 @@ public class ClearUIAnimation : MonoBehaviour
 
     private void SaveData(int starCnt)
     {
+        float timer = StageManager.Instance.clearStageTimers[stageIdx];
+
         Data data = new Data();
-        data.startCnt = starCnt;
-        data.timer = currentTime;
+        if (StageManager.Instance.clearStageStarNums[stageIdx] <= starCnt)
+            data.startCnt = starCnt;
+        if (timer >= currentTime)
+        {
+            data.timer = currentTime;
+            timer = currentTime;
+        }
+
+        levelTxt.text = "Stage : " + stageIdx;
+        timerTxt.text = timer.ToString("N2") + "s";
 
         StageManager.Instance.AddStageNum();
         StageManager.Instance.SaveStage(data);  
     }
+
 }
