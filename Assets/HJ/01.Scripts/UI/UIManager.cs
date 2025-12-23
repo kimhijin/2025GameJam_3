@@ -9,12 +9,13 @@ namespace HJ
     {
         [SerializeField] private GameObject soundUI; //
         [SerializeField] private GameObject settingUI;
+        [SerializeField] private GameObject clearUI;
         [SerializeField] private string nextSceneName;
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Escape))
-                settingUI.SetActive(!settingUI.activeSelf);
+            if (Input.GetKeyDown(KeyCode.Escape) && !clearUI.activeSelf)
+                ActiveSetting();    
         }
 
 
@@ -39,14 +40,29 @@ namespace HJ
             SceneManager.LoadScene("Stage");
         }
 
-        public void HandleOpenSetting()
+        public void HandleOpenVolum()
         {
             soundUI.SetActive(true);
         }
 
-        public void HandleCloseSetting()
+        public void HandleCloseVolum()
         {
             soundUI.SetActive(false);
+        }
+
+        public void ActiveSetting()
+        {
+            Debug.Log("Input Esc");
+            if(settingUI.activeSelf == false)
+            {
+                settingUI.SetActive(true);
+                Time.timeScale = 0;
+            }
+            else
+            {
+                settingUI.SetActive(false);
+                Time.timeScale = 1;
+            }
         }
     }
 }
