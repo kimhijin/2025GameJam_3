@@ -33,7 +33,6 @@ public class StageManager : MonoBehaviour
         bool active= arg0.name == "Stage";
         foreach(var item in StageList)
         {
-            item.transform.DOKill();
             item.gameObject.SetActive(active);
         }
     }
