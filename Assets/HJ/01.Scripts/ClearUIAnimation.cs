@@ -25,6 +25,7 @@ public class ClearUIAnimation : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log("Open ClearUI");
         currentTime = GameManager.Instance.Timer;
         SpawnStar();
         Time.timeScale = 0;
