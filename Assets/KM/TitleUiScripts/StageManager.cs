@@ -1,6 +1,8 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
@@ -8,7 +10,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] private int nowStageNum = 0;
     [SerializeField] private List<int> clearStageStarNums = new List<int>();
     [SerializeField] private List<float> clearStageTimers = new List<float>();
-    [SerializeField] private List<GameObject> StageList = new List<GameObject>();
+    [SerializeField] private List<StageUI> StageList = new List<StageUI>();
 
     private int totalClearStage = 0;
     private void Awake()
@@ -22,6 +24,17 @@ public class StageManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        SceneManager.sceneLoaded += StageActive;
+    }
+
+    private void StageActive(Scene arg0, LoadSceneMode arg1)
+    {
+        bool active= arg0.name == "Stage";
+        foreach(var item in StageList)
+        {
+            item.gameObject.SetActive(active);
+        }
     }
 
     private void Start()
@@ -29,9 +42,13 @@ public class StageManager : MonoBehaviour
         for(int i = 0; i < StageList.Count; i++)
         {
             StageList[i].GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1f);
+            StageList[i].active = false;
+            Debug.Log(StageList[i].enabled);
         }
         LoadData();
     }
+
+    
 
     public void SaveStage(Data data)
     {
@@ -68,6 +85,7 @@ public class StageManager : MonoBehaviour
         {
             if(i < nowStageNum)
             {
+                StageList[i].active = true;
                 StageList[i].GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
                 GameObject starparent = StageList[i].transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
                 GameObject timerparent = StageList[i].transform.GetChild(1).gameObject.transform.GetChild(1).gameObject;
